@@ -2,7 +2,7 @@ using System;
 
 namespace Core.SharedResources;
 
-public class Keys
+public class SharedResourcesKeys
 {
     public const string NotFound = "NotFound";
     public const string BadRequest = "BadRequest";

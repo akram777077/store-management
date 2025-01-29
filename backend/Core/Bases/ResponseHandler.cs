@@ -7,107 +7,102 @@ namespace Core.Bases;
 
 public class ResponseHandler
 {
-    private readonly IStringLocalizer _stringLocalizer;
+     IStringLocalizer _stringLocalizer;
 
+        public ResponseHandler(IStringLocalizer stringLocalizer)
+        {
+            _stringLocalizer = stringLocalizer;
+        }
 
-    public ResponseHandler(IStringLocalizer stringLocalizer)
-    {
-        _stringLocalizer = stringLocalizer;
-    }
+        public Response<T> Deleted<T>(string message)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Succeeded = true,
+                Message = string.IsNullOrEmpty(message)? _stringLocalizer[SharedResourcesKeys.Deleted] : message
+            };
+        }
+        public Response<T> InternalServerError<T>()
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                Succeeded = true,
+                Message = "InternalServerError"
+            };
+        }
+        public Response<T> Success<T>(T entity, object Meta = null)
+        {
+            return new Response<T>()
+            {
+                Data = entity,
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Succeeded = true,
+                Message = _stringLocalizer[SharedResourcesKeys.Success],
+                Meta = Meta
+            };
+        }
+        public Response<T> Unauthorized<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.Unauthorized,
+                Succeeded = true,
+                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.UnAuthorized] : Message
+            };
+        }
+        public Response<T> BadRequest<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.BadRequest,
+                Succeeded = false,
+                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.BadRequest] : Message
+            };
+        }
 
-    public Response<T> Deleted<T>(string? message = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithStatusCode(HttpStatusCode.OK)
-            .WithSucceeded(true)
-            .WithMessage(message ?? _stringLocalizer[Keys.Deleted])
-            .Build();
-    }
+        public Response<T> UnprocessableEntity<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+                Succeeded = false,
+                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.UnprocessableEntity] : Message
+            };
+        }
 
-    public Response<T> InternalServerError<T>()
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithStatusCode(HttpStatusCode.InternalServerError)
-            .WithSucceeded(false)
-            .WithMessage("InternalServerError")
-            .Build();
-    }
+        public Response<T> NotFound<T>(string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.NotFound,
+                Succeeded = false,
+                Message = message == null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message
+            };
+        }
 
-    public Response<T> Success<T>(T entity, object? meta = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithData(entity)
-            .WithStatusCode(HttpStatusCode.OK)
-            .WithSucceeded(true)
-            .WithMessage(_stringLocalizer[Keys.Success])
-            .WithMeta(meta)
-            .Build();
-    }
+        public Response<T> Created<T>(T entity, object Meta = null)
+        {
+            return new Response<T>()
+            {
+                Data = entity,
+                StatusCode = System.Net.HttpStatusCode.Created,
+                Succeeded = true,
+                Message = _stringLocalizer[SharedResourcesKeys.Created],
+                Meta = Meta
+            };
+        }
 
-    public Response<T> Unauthorized<T>(string? message = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithStatusCode(HttpStatusCode.Unauthorized)
-            .WithSucceeded(false)
-            .WithMessage(message ?? _stringLocalizer[Keys.UnAuthorized])
-            .Build();
-    }
-
-    public Response<T> BadRequest<T>(string? message = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithStatusCode(HttpStatusCode.BadRequest)
-            .WithSucceeded(false)
-            .WithMessage(message ?? _stringLocalizer[Keys.BadRequest])
-            .Build();
-    }
-
-    public Response<T> UnprocessableEntity<T>(string? message = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithStatusCode(HttpStatusCode.UnprocessableEntity)
-            .WithSucceeded(false)
-            .WithMessage(message ?? _stringLocalizer[Keys.UnprocessableEntity])
-            .Build();
-    }
-
-    public Response<T> NotFound<T>(string? message = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithStatusCode(HttpStatusCode.NotFound)
-            .WithSucceeded(false)
-            .WithMessage(message ?? _stringLocalizer[Keys.NotFound])
-            .Build();
-    }
-
-    public Response<T> Created<T>(T entity, object? meta = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithData(entity)
-            .WithStatusCode(HttpStatusCode.Created)
-            .WithSucceeded(true)
-            .WithMessage(_stringLocalizer[Keys.Created])
-            .WithMeta(meta)
-            .Build();
-    }
-
-    public Response<T> Conflict<T>(T entity, object? meta = null)
-    {
-        return Response<T>
-            .CreateBuilder()
-            .WithData(entity)
-            .WithStatusCode(HttpStatusCode.Conflict)
-            .WithSucceeded(false)
-            .WithMessage(_stringLocalizer[Keys.Conflict])
-            .WithMeta(meta)
-            .Build();
-    }
+        public Response<T> Conflict<T>(T entity, object Meta = null)
+        {
+            return new Response<T>()
+            {
+                Data = entity,
+                StatusCode = System.Net.HttpStatusCode.Conflict,
+                Succeeded = false,
+                Message = _stringLocalizer[SharedResourcesKeys.Conflict],
+                Meta = Meta
+            };
+        }
 }
