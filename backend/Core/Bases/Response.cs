@@ -4,75 +4,36 @@ namespace Core.Bases;
 
 public class Response<T>
 {
-    public HttpStatusCode StatusCode { get; }
-    public object? Meta { get; }
-    public bool Succeeded { get; }
-    public string? Message { get; }
-    public List<string>? Errors { get; }
-    public T? Data { get; }
-    private Response(HttpStatusCode statusCode, object? meta, bool succeeded, string? message, List<string>? errors, T? data)
+
+    public Response()
     {
-        StatusCode = statusCode;
-        Meta = meta;
-        Succeeded = succeeded;
+
+    }
+    public Response(T data, string message = null)
+    {
+        Succeeded = true;
         Message = message;
-        Errors = errors;
         Data = data;
     }
-
-    public class Builder
+    public Response(string message)
     {
-        private HttpStatusCode _statusCode = HttpStatusCode.OK;
-        private  object? _meta;
-        private bool _succeeded = true;
-        private  string? _message ;
-        private List<string>? _errors;
-        private T? _data;
-
-        public Builder WithStatusCode(HttpStatusCode statusCode)
-        {
-            _statusCode = statusCode;
-            return this;
-        }
-
-        public Builder WithMeta(object? meta)
-        {
-            _meta = meta;
-            return this;
-        }
-
-        public Builder WithSucceeded(bool succeeded)
-        {
-            _succeeded = succeeded;
-            return this;
-        }
-
-        public Builder WithMessage(string? message)
-        {
-            _message = message;
-            return this;
-        }
-
-        public Builder WithErrors(List<string>? errors)
-        {
-            _errors = errors;
-            return this;
-        }
-
-        public Builder WithData(T data)
-        {
-            _data = data;
-            return this;
-        }
-
-        public Response<T> Build()
-        {
-            return new Response<T>(_statusCode, _meta, _succeeded, _message, _errors, _data);
-        }
+        Succeeded = false;
+        Message = message;
+    }
+    public Response(string message, bool succeeded)
+    {
+        Succeeded = succeeded;
+        Message = message;
     }
 
-    public static Builder CreateBuilder()
-    {
-        return new Builder();
-    }
+    public HttpStatusCode StatusCode { get; set; }
+    public object Meta { get; set; }
+
+    public bool Succeeded { get; set; }
+    public string Message { get; set; }
+    public List<string> Errors { get; set; }
+    //public Dictionary<string, List<string>> ErrorsBag { get; set; }
+    public T Data { get; set; }
 }
+
+
