@@ -77,7 +77,7 @@ namespace Core.MiddleWare
                         break;
                     default:
                         // unhandled error
-                        responseModel.Message = error.Message;
+                        responseModel.Message = error?.Message;
                         responseModel.StatusCode = HttpStatusCode.InternalServerError;
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;

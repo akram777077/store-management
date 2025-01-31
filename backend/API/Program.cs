@@ -3,6 +3,7 @@ using Core.MiddleWare;
 using Infrastracture;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using Scalar.AspNetCore;
 using ServiceLayer;
 using System.Globalization;
 
@@ -50,12 +51,18 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference(options => 
+    {
+        options.Title = "Store API";
+        options.DefaultHttpClient = new (ScalarTarget.CSharp,ScalarClient.HttpClient);
+        options.CustomCss="";
+    });
 }
 
 #region Localization middleware
 
 var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(options.Value);
+app.UseRequestLocalization(options!.Value);
 
 #endregion
 

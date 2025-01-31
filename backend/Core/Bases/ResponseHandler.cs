@@ -32,7 +32,7 @@ public class ResponseHandler
                 Message = "InternalServerError"
             };
         }
-        public Response<T> Success<T>(T entity, object Meta = null)
+        public Response<T> Success<T>(T entity, object? Meta = null)
         {
             return new Response<T>()
             {
@@ -43,7 +43,7 @@ public class ResponseHandler
                 Meta = Meta
             };
         }
-        public Response<T> Unauthorized<T>(string Message = null)
+        public Response<T> Unauthorized<T>(string? Message = null)
         {
             return new Response<T>()
             {
@@ -52,7 +52,7 @@ public class ResponseHandler
                 Message = Message == null ? _stringLocalizer[SharedResourcesKeys.UnAuthorized] : Message
             };
         }
-        public Response<T> BadRequest<T>(string Message = null)
+        public Response<T> BadRequest<T>(string? Message = null)
         {
             return new Response<T>()
             {
@@ -62,7 +62,7 @@ public class ResponseHandler
             };
         }
 
-        public Response<T> UnprocessableEntity<T>(string Message = null)
+        public Response<T> UnprocessableEntity<T>(string? Message = null)
         {
             return new Response<T>()
             {
@@ -72,7 +72,7 @@ public class ResponseHandler
             };
         }
 
-        public Response<T> NotFound<T>(string message = null)
+        public Response<T> NotFound<T>(string? message = null)
         {
             return new Response<T>()
             {
@@ -82,7 +82,7 @@ public class ResponseHandler
             };
         }
 
-        public Response<T> Created<T>(T entity, object Meta = null)
+        public Response<T> Created<T>(T entity, object? Meta = null)
         {
             return new Response<T>()
             {
@@ -94,7 +94,7 @@ public class ResponseHandler
             };
         }
 
-        public Response<T> Conflict<T>(T entity, object Meta = null)
+        public Response<T> Conflict<T>(T entity, object? Meta = null)
         {
             return new Response<T>()
             {
