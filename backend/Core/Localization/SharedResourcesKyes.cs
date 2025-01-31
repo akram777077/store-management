@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.SharedResources;
+namespace Core.Localization;
 
 public class SharedResourcesKeys
 {

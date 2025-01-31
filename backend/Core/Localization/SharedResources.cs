@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.SharedResources
+namespace Core.Localization
+
 {
-    internal class SharedResources
+    public class SharedResources
     {
     }
 }
