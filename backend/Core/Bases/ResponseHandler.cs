@@ -1,6 +1,6 @@
 using System;
 using System.Net;
-using Core.SharedResources;
+using Core.Localization;
 using Microsoft.Extensions.Localization;
 
 namespace Core.Bases;
