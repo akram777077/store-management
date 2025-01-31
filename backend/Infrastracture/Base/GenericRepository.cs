@@ -31,7 +31,7 @@ namespace Infrastracture.Base
         #endregion
 
         #region Actions
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(long id)
         {
 
             return await _dbContext.Set<T>().FindAsync(id);

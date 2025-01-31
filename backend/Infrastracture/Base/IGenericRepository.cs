@@ -10,7 +10,7 @@ namespace Infrastracture.Base
     public interface IGenericRepository<T> where T : class
     {
         Task DeleteRangeAsync(ICollection<T> entities);
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(long id);
         Task SaveChangesAsync();
         IDbContextTransaction BeginTransaction();
         void Commit();
