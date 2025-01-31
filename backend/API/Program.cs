@@ -62,7 +62,7 @@ if (app.Environment.IsDevelopment())
 #region Localization middleware
 
 var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(options.Value);
+app.UseRequestLocalization(options!.Value);
 
 #endregion
 
