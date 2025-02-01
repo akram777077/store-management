@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastracture.Data;
+using dotenv.net;
 
 namespace Infrastracture
 {
@@ -16,8 +17,10 @@ namespace Infrastracture
     {
         public static IServiceCollection AddServiceRegistration(this IServiceCollection services, IConfiguration configuration)
         {
+            
             //Connection SQL
-            var connectionStr = configuration["ConnectionStrings:dbcontext"];
+            var connectionStr = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
+            //var conn = "Host=localhost;Port=5432;Database=dbmangment;Username=postgres;Password=123;";
             if (string.IsNullOrEmpty(connectionStr))
             {
                 throw new InvalidOperationException("Database connection string is not configured.");
