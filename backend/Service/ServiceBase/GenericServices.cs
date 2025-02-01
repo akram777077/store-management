@@ -46,7 +46,7 @@ namespace ServiceLayer.ServiceBase
             await _repository.DeleteAsync(entity);
         }
 
-        public async Task<List<T>> GetListAsync()
+        public async Task<IEnumerable<T>> GetListAsync()
         {
             return await _repository.GetTableNoTracking().ToListAsync();
         }

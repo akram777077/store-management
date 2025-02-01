@@ -11,7 +11,7 @@ namespace ServiceLayer.ServiceBase
     {
         Task<T> AddAsync(T entity);
         Task<T?> GetByIdAsync(long id);
-        Task<List<T>> GetListAsync();
+        Task<IEnumerable<T>> GetListAsync();
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
     }
