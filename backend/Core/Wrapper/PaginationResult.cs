@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Wrapper
 {
     public class PaginatedResult<T>
     {
-        public PaginatedResult(List<T> data)
+        public PaginatedResult(IEnumerable<T> data)
         {
-            Data = data;
+            Data = data?.ToList();
         }
-        public List<T> Data { get; set; }
 
-        internal PaginatedResult(bool succeeded, List<T> data = default, List<string> messages = null, int count = 0, int page = 1, int pageSize = 10)
+        internal PaginatedResult(bool succeeded, IEnumerable<T>? data = default, IReadOnlyCollection<string>? messages = null, int count = 0, int page = 1, int pageSize = 10)
         {
-            Data = data;
+            Data = data?.ToList();
             CurrentPage = page;
             Succeeded = succeeded;
             PageSize = pageSize;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             TotalCount = count;
+            Messages = messages?.ToList() ?? new List<string>();
         }
 
-        public static PaginatedResult<T> Success(List<T> data, int count, int page, int pageSize)
+        public static PaginatedResult<T> Success(IEnumerable<T> data, int count, int page, int pageSize)
         {
-            return new(true, data, null, count, page, pageSize);
+            return new PaginatedResult<T>(true, data, null, count, page, pageSize);
         }
+
+        public List<T>? Data { get; set; }
 
         public int CurrentPage { get; set; }
 
@@ -35,7 +35,7 @@ namespace Core.Wrapper
 
         public int TotalCount { get; set; }
 
-        public object Meta { get; set; }
+        public object? Meta { get; set; }
 
         public int PageSize { get; set; }
 
@@ -47,5 +47,4 @@ namespace Core.Wrapper
 
         public bool Succeeded { get; set; }
     }
-
 }
