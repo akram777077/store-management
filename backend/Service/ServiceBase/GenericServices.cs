@@ -27,7 +27,7 @@ namespace ServiceLayer.ServiceBase
         }
 
         // Get by Id
-        public async Task<T> GetByIdAsync(long id)
+        public async Task<T?> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id);
         }
