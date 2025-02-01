@@ -18,7 +18,7 @@ namespace Core
         {
             //configuration of the mediator
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             // configuration of  Validators
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
