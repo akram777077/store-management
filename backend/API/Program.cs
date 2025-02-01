@@ -1,11 +1,14 @@
 using Core;
 using Core.MiddleWare;
+using dotenv.net;
 using Infrastracture;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using Scalar.AspNetCore;
 using ServiceLayer;
 using System.Globalization;
+
+DotEnv.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +27,7 @@ builder.Services.AddLocalization(opt =>
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    List<CultureInfo> supportedCultures = new List<CultureInfo>
+    IEnumerable<CultureInfo> supportedCultures = new List<CultureInfo>()
         {
             new CultureInfo("ar-EG"),
             new CultureInfo("en-US"),
@@ -34,15 +37,15 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
         };
 
     options.DefaultRequestCulture = new RequestCulture("ar-EG");
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
+    options.SupportedCultures = supportedCultures.ToList();
+    options.SupportedUICultures = supportedCultures.ToList();
 });
 
 #endregion
-
+var configuration = builder.Configuration;
 #region Dependency injection
 builder.Services.AddInfrastractureDependencies()
-    .AddServiceDependencies().AddCoreDependencies().AddServiceRegistration(builder.Configuration);
+    .AddServiceDependencies().AddCoreDependencies().AddServiceRegistration(configuration);
 #endregion
 
 var app = builder.Build();

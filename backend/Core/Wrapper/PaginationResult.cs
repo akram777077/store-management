@@ -27,7 +27,7 @@ namespace Core.Wrapper
             return new PaginatedResult<T>(true, data, null, count, page, pageSize);
         }
 
-        public List<T>? Data { get; set; }
+        public IEnumerable<T>? Data { get; set; }
 
         public int CurrentPage { get; set; }
 
