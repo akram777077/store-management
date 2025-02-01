@@ -1,7 +1,6 @@
 ﻿using Data.Entities;
 using Infrastracture.Base;
 using Infrastracture.Data;
-using Infrastracture.Base;
 using Infrastracture.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
