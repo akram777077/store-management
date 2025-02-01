@@ -1,4 +1,5 @@
 ﻿using API.Base;
+using Core.Featurs.Categories.Commands.Requests;
 using Core.Featurs.Categories.Queries.Resquests;
 using Data.AppMetaData;
 using Data.Entities;
@@ -23,6 +24,22 @@ namespace API.Controllers
         {
             var response = await _mediator.Send(new GetCategoriesListQuery());
             return Ok(response);
+        }
+
+        [HttpPost]
+        [Route(Router.CategoryRouteing.Create)]
+
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<Category>> Create([FromBody] CreateCategoryCommand categoryCommand)
+        {
+            var response = await _mediator.Send(categoryCommand);
+            return NewResult(response);
         }
     }
 }

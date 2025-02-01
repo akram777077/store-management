@@ -5,4 +5,5 @@ namespace ServiceLayer.Interfaces;
 
 public interface ICategoryService : IGenericService<Category>
 {
+    public Task<bool> IsCategoryNameExists(string name);
 }

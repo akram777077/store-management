@@ -129,8 +129,17 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف</value>
   </data>
+  <data name="IsAlreadyExits" xml:space="preserve">
+    <value>موجود بالفعل</value>
+  </data>
+  <data name="NotEmpty" xml:space="preserve">
+    <value>هاذا الحقل لايجب ان يكون فارغا</value>
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>غير موجود</value>
+  </data>
+  <data name="NotNull" xml:space="preserve">
+    <value>يجب تعريف هاذا الحقل</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>نجاح</value>
