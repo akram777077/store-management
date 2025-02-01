@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../Data/Data.csproj" />
+    <ProjectReference Include="../Service/Service.csproj" />
+  </ItemGroup>
+
 </Project>
