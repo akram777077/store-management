@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Featurs.Categories.Queries.Responses
 {
-    public class GetCategoriesListResponse
+    public class GetCategoriesResponse
     {
         public long Id { get; set; }
         public string Name { get; set; }

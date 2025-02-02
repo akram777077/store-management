@@ -9,7 +9,13 @@ using System.Threading.Tasks;
 
 namespace Core.Featurs.Categories.Queries.Resquests
 {
-    public class GetCategoriesListQuery : IRequest<Response<IEnumerable<GetCategoriesResponse>>>
+    public class GetCategoriesByIdQuery : IRequest<Response<GetCategoriesResponse>>
     {
+        public GetCategoriesByIdQuery(int id)
+        {
+            Id = id;
+        }
+
+        public int Id { get; set; }
     }
 }
