@@ -26,9 +26,16 @@ public class CategoryService : GenericService<Category>, ICategoryService
          return await _repository.GetTableNoTracking()
                 .AnyAsync(s => s.Name.Equals(name));
     }
+    public async Task<Category> GetCategoryByName(string name)
+    {
+        return await _repository.GetTableNoTracking()
+                .FirstOrDefaultAsync(s => s.Name.Equals(name));
+    }
+
     public async Task<Category> GetCategoryById(int id)
     {
         return await _repository.GetByIdAsync(id);
     }
+
     #endregion
 }

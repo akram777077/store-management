@@ -16,7 +16,8 @@ namespace Core.Featurs.Categories.Queries.Handlers
 {
     public class CategoryQueriesHandler : ResponseHandler,
         IRequestHandler<GetCategoriesListQuery, Response<IEnumerable<GetCategoriesResponse>>>,
-        IRequestHandler<GetCategoriesByIdQuery, Response<GetCategoriesResponse>>
+        IRequestHandler<GetCategoriesByIdQuery, Response<GetCategoriesResponse>>,
+        IRequestHandler<GetCategoryByNameQuery, Response<GetCategoriesResponse>>
         
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -42,6 +43,21 @@ namespace Core.Featurs.Categories.Queries.Handlers
             return result;
 
         }
+
+        public async Task<Response<GetCategoriesResponse>> Handle(GetCategoryByNameQuery request, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(request.Name))
+                return BadRequest<GetCategoriesResponse>(); 
+
+            var category = await _categoryService.GetCategoryByName(request.Name);
+
+            if(category == null)
+                return NotFound<GetCategoriesResponse>();
+            
+            var categoriesmapper = _mapper.Map<GetCategoriesResponse>(category);
+            return Success(categoriesmapper);
+        }
+        
         public async Task<Response<GetCategoriesResponse>> Handle(GetCategoriesByIdQuery request, CancellationToken cancellationToken)
         {
             if(request.Id <= 0)

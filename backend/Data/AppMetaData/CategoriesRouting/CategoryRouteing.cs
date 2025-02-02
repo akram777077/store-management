@@ -13,7 +13,8 @@ namespace Data.AppMetaData
             public const string Prefix = "Categories/";
             public const string List = Prefix + "List";
             public const string Paginated = Prefix + "Paginated";
-            public const string GetById = Prefix + "{Id}";
+            public const string GetById = Prefix + "{id:int}";
+            public const string GetByName = Prefix + "{name}";
             public const string Create = Prefix + "Create";
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "Delete/" + "{Id}";

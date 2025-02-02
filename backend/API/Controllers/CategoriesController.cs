@@ -38,6 +38,20 @@ namespace API.Controllers
             var response = await _mediator.Send(new GetCategoriesByIdQuery(id));
             return NewResult(response);
         }
+
+        [HttpGet]
+        [Route(Router.CategoryRouteing.GetByName)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Category>> GetCategoryByName([FromRoute] string name)
+        {
+            var response = await _mediator.Send(new GetCategoryByNameQuery(name));
+            return NewResult(response);
+        }
+
         [HttpPost]
         [Route(Router.CategoryRouteing.Create)]
 
