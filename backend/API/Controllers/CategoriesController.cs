@@ -4,6 +4,7 @@ using Core.Featurs.Categories.Queries.Resquests;
 using Data.AppMetaData;
 using Data.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -81,6 +82,20 @@ namespace API.Controllers
         public async Task<ActionResult<Category>> Edit([FromBody] EditCategoryCommande categoryCommande)
         {
             var response = await _mediator.Send(categoryCommande);
+            return NewResult(response);
+        }
+
+        [HttpDelete]
+        [Route(Router.CategoryRouteing.Delete)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<Category>> Delete([FromRoute] int Id)
+        {
+            var response = await _mediator.Send(new DeleteCategoryCommand { Id = Id });
             return NewResult(response);
         }
     }
