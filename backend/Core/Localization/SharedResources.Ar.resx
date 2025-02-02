@@ -141,6 +141,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>يجب تعريف هاذا الحقل</value>
   </data>
+  <data name="NotValid" xml:space="preserve">
+    <value>غير صالح</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>نجاح</value>
   </data>

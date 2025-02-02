@@ -67,5 +67,21 @@ namespace API.Controllers
             var response = await _mediator.Send(categoryCommand);
             return NewResult(response);
         }
+
+        [HttpPut]
+        [Route(Router.CategoryRouteing.Edit)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<ActionResult<Category>> Edit([FromBody] EditCategoryCommande categoryCommande)
+        {
+            var response = await _mediator.Send(categoryCommande);
+            return NewResult(response);
+        }
     }
 }

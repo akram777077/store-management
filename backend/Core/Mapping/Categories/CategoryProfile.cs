@@ -12,6 +12,7 @@ namespace Core.Mapping.Categories
         public CategoryProfile()
         {
             GetCategoriesMapping();
+            EditCategoryMapping();
             CreateCategoryMapping();
         }
     }
