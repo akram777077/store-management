@@ -10,9 +10,9 @@ namespace Core.Mapping.Categories
 {
     public partial class CategoryProfile
     {
-        private void GetCategoriesListMapping()
+        private void GetCategoriesMapping()
         {
-            CreateMap<Category, GetCategoriesListResponse>();
+            CreateMap<Category, GetCategoriesResponse>();
         }
     }
 }
