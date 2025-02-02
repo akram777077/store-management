@@ -14,7 +14,9 @@ using System.Threading.Tasks;
 
 namespace Core.Featurs.Categories.Commands.Handlers
 {
-    public class CategoryCommandsHandler : ResponseHandler, IRequestHandler<CreateCategoryCommand, Response<string>>
+    public class CategoryCommandsHandler : ResponseHandler,
+        IRequestHandler<CreateCategoryCommand, Response<string>>,
+        IRequestHandler<EditCategoryCommande, Response<string>>
     {
         #region Properties
         private readonly IMapper _mapper;
@@ -38,6 +40,19 @@ namespace Core.Featurs.Categories.Commands.Handlers
             var response = await _categoryService.AddAsync(category);
             
             return Created("");
+        }
+
+        public async Task<Response<string>> Handle(EditCategoryCommande request, CancellationToken cancellationToken)
+        {
+            var category = await _categoryService.GetByIdAsync(request.Id);
+            if(category == null)
+                return NotFound<string>();
+
+            _mapper.Map(request, category);
+
+            await _categoryService.UpdateAsync(category);
+            return Success("");
+
         }
         #endregion
     }

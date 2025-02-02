@@ -141,6 +141,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>Should not be null</value>
   </data>
+  <data name="NotValid" xml:space="preserve">
+    <value>Not Valid</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>

@@ -15,4 +15,5 @@ public class SharedResourcesKeys
     public const string NotEmpty = "NotEmpty";
     public const string NotNull = "NotNull";
     public const string IsAlreadyExits = "IsAlreadyExits";
+    public const string NotValid = "NotValid";
 }

@@ -37,5 +37,11 @@ public class CategoryService : GenericService<Category>, ICategoryService
         return await _repository.GetByIdAsync(id);
     }
 
+    public Task<bool> IsCategoryNameExists(string name, int id)
+    {
+        return _repository.GetTableNoTracking()
+                .AnyAsync(s => s.Name.Equals(name) && s.Id != id);
+    }
+
     #endregion
 }
