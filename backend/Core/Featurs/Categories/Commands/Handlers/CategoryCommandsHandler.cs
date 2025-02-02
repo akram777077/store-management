@@ -16,7 +16,8 @@ namespace Core.Featurs.Categories.Commands.Handlers
 {
     public class CategoryCommandsHandler : ResponseHandler,
         IRequestHandler<CreateCategoryCommand, Response<string>>,
-        IRequestHandler<EditCategoryCommande, Response<string>>
+        IRequestHandler<EditCategoryCommande, Response<string>>,
+        IRequestHandler<DeleteCategoryCommand, Response<string>>
     {
         #region Properties
         private readonly IMapper _mapper;
@@ -53,6 +54,23 @@ namespace Core.Featurs.Categories.Commands.Handlers
             await _categoryService.UpdateAsync(category);
             return Success("");
 
+        }
+
+        public async Task<Response<string>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+        {
+            //check if Id exists
+            var category = await _categoryService.GetByIdAsync(request.Id);
+
+            //return not found if not exist
+            if (category == null)
+                return NotFound<string>();
+
+            //cal the edit service
+            var result = await _categoryService.DeleteAsync(category);
+
+            //return response
+            if (result == "Deleted") return Deleted<string>("");
+            else return InternalServerError<string>();
         }
         #endregion
     }

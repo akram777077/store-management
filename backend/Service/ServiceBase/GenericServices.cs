@@ -41,9 +41,21 @@ namespace ServiceLayer.ServiceBase
 
         
         // Delete a single entity
-        public async Task DeleteAsync(T entity)
+        public async Task<string> DeleteAsync(T entity)
         {
-            await _repository.DeleteAsync(entity);
+            var transaction = _repository.BeginTransaction();
+            try
+            {
+                await _repository.DeleteAsync(entity);
+                transaction.Commit();
+                return "Deleted";
+            }
+            catch (Exception)
+            {
+
+                transaction.Rollback();
+                return "Faild";
+            }
         }
 
         public async Task<IEnumerable<T>> GetListAsync()
