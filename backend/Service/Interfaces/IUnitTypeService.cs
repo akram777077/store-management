@@ -5,4 +5,5 @@ namespace ServiceLayer.Interfaces;
 
 public interface IUnitTypeService : IGenericService<UnitType>
 {
+    Task<UnitType?> GetUnitTypesByNameAsync(string name);
 }
