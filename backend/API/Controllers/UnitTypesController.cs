@@ -25,5 +25,12 @@ namespace API.Controllers
             var response = await _mediator.Send(new GetUnitTypeByNameRequest(name));
             return NewResult(response);
         }
+        [HttpGet]
+        [Route(Router.UnitTypesRoute.GetUnitTypeById)]
+        public async Task<ActionResult<UnitType>> GetUnitTypeById(long id)
+        {
+            var response = await _mediator.Send(new GetUnitTypeByIdRequest(id));
+            return NewResult(response);
+        }
     }
 }
