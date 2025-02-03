@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route(Router.UnitTypesRoute.prefix)]
+    [Route(Router.UnitTypesRoute.Prefix)]
     [ApiController]
     public class UnitTypesController(IMediator mediator) : AppBaseController(mediator)
     {
@@ -16,6 +16,13 @@ namespace API.Controllers
         public async Task<ActionResult<UnitType>> GetUnitTypesList()
         {
             var response = await _mediator.Send(new GetUnitTypesListRequest());
+            return NewResult(response);
+        }
+        [HttpGet]
+        [Route(Router.UnitTypesRoute.GetUnitTypeByName)]
+        public async Task<ActionResult<UnitType>> GetUnitTypeByName(string name)
+        {
+            var response = await _mediator.Send(new GetUnitTypeByNameRequest(name));
             return NewResult(response);
         }
     }
