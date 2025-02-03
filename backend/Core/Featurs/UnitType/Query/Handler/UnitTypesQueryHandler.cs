@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using Core.Bases;
+using Core.Featurs.Categories.Queries.Responses;
 using Core.Featurs.UnitType.Query.Request;
 using Core.Featurs.UnitType.Query.Response;
 using Core.Localization;
@@ -12,7 +13,8 @@ using ServiceLayer.Interfaces;
 namespace Core.Featurs.UnitType.Query.Handler;
 
 public class UnitTypesQueryHandler: ResponseHandler,
-    IRequestHandler<GetUnitTypesListRequest, Response<IEnumerable<GetUnitTypesResponse>>>
+    IRequestHandler<GetUnitTypesListRequest, Response<IEnumerable<GetUnitTypesResponse>>>,
+    IRequestHandler<GetUnitTypeByNameRequest, Response<GetUnitTypeResponse>>
 {
     private readonly IUnitTypeService _unitTypeService;
     private readonly IStringLocalizer<SharedResources> _localizer;
@@ -31,5 +33,14 @@ public class UnitTypesQueryHandler: ResponseHandler,
         var unitTypes = await _unitTypeService.GetListAsync();
         var unitTypesList = _mapper.Map<IEnumerable<GetUnitTypesResponse>>(unitTypes);
         return Success(unitTypesList);
+    }
+
+    public async Task<Response<GetUnitTypeResponse>> Handle(GetUnitTypeByNameRequest request, CancellationToken cancellationToken)
+    {
+        var entity = await _unitTypeService.GetUnitTypesByNameAsync(request.Name);
+        if (entity is null)
+            return NotFound<GetUnitTypeResponse>();
+        var entityMap = _mapper.Map<GetUnitTypeResponse>(entity);
+        return Success(entityMap);
     }
 }
