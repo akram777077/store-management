@@ -1,4 +1,5 @@
 using API.Base;
+using Core.Featurs.UnitType.Commands.Requests;
 using Core.Featurs.UnitType.Query.Request;
 using Data.AppMetaData;
 using Data.Entities;
@@ -30,6 +31,12 @@ namespace API.Controllers
         public async Task<ActionResult<UnitType>> GetUnitTypeById(long id)
         {
             var response = await _mediator.Send(new GetUnitTypeByIdRequest(id));
+            return NewResult(response);
+        }
+        [HttpPost]
+        public async Task<ActionResult<UnitType>> CreateUnitType([FromBody]CreateUnitTypeCommand unitTypeCommand)
+        {
+            var response = await _mediator.Send(unitTypeCommand);
             return NewResult(response);
         }
     }
