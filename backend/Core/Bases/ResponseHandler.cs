@@ -105,4 +105,15 @@ public class ResponseHandler
                 Meta = Meta
             };
         }
+        public Response<T> NoContent<T>(object? Meta = null)
+        {
+            return new Response<T>()
+            {
+                Data = default,
+                StatusCode = System.Net.HttpStatusCode.NoContent,
+                Succeeded = true,
+                Message = _stringLocalizer[SharedResourcesKeys.NoContent],
+                Meta = Meta
+            };
+        }
 }

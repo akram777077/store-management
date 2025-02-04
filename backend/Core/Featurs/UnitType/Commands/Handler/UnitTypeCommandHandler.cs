@@ -16,7 +16,8 @@ public class UnitTypeCommandHandler(
     IUnitTypeService service,
     IMapper mapper)
     : ResponseHandler(localizer),
-        IRequestHandler<CreateUnitTypeCommand, Response<string>>
+        IRequestHandler<CreateUnitTypeCommand, Response<string>>,
+        IRequestHandler<DeleteUnitTypeByIdCommand, Response<string>>
 {
     private readonly IStringLocalizer<SharedResources> _localizer = localizer;
     private readonly IUnitTypeService _service = service;
@@ -27,5 +28,16 @@ public class UnitTypeCommandHandler(
         var unitType = _mapper.Map<Data.Entities.UnitType>(request);
         await _service.AddAsync(unitType);
         return Created("");
+    }
+
+    public async Task<Response<string>> Handle(DeleteUnitTypeByIdCommand request, CancellationToken cancellationToken)
+    {
+        if (request.Id < 1)
+            return BadRequest<string>();
+        var entity = await _service.GetByIdAsync(request.Id);
+        if (entity is null)
+            return NotFound<string>();
+        await _service.DeleteAsync(entity);
+        return NoContent<string>("");
     }
 }
