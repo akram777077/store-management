@@ -12,4 +12,8 @@ public class SharedResourcesKeys
     public const string UnAuthorized = "UnAuthorized";
     public const string UnprocessableEntity = "UnprocessableEntity";
     public const string Success = "Success";
+    public const string NotEmpty = "NotEmpty";
+    public const string NotNull = "NotNull";
+    public const string IsAlreadyExits = "IsAlreadyExits";
+    public const string NotValid = "NotValid";
 }

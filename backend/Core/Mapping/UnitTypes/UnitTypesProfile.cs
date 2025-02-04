@@ -9,5 +9,6 @@ public partial class UnitTypesProfile : Profile
     {
         GetUnitTypesMapping();
         GetUnitTypeMapping();
+        CreateUnitTypeMapping();
     }
 }
