@@ -2,6 +2,7 @@ using Core.Bases;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace API.Base
 {
@@ -20,7 +21,7 @@ namespace API.Base
         //protected IMediator Mediator => _mediatorInstance ??= HttpContext.RequestServices.GetService<IMediator>();
 
         #region Actions
-        public ObjectResult NewResult<T>(Response<T> response)
+        public ActionResult NewResult<T>(Response<T> response)
         {
             switch (response.StatusCode)
             {
@@ -40,6 +41,8 @@ namespace API.Base
                     return new AcceptedResult(string.Empty, response);
                 case HttpStatusCode.UnprocessableEntity:
                     return new UnprocessableEntityObjectResult(response);
+                case HttpStatusCode.NoContent:
+                    return new NoContentResult();
                 default:
                     return new NotFoundObjectResult(response);
             }

@@ -39,5 +39,14 @@ namespace API.Controllers
             var response = await _mediator.Send(unitTypeCommand);
             return NewResult(response);
         }
+        [HttpDelete]
+        [Route(Router.UnitTypesRoute.DeleteById)]
+        public async Task<ActionResult<UnitType>> DeleteUnitTypeByName(int id)
+        {
+            var command = new DeleteUnitTypeByIdCommand { Id = id };
+            var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
+        
     }
 }
