@@ -6,8 +6,8 @@ namespace Core.Mapping.UnitTypes;
 
 public partial class UnitTypesProfile 
 {
-    public void CreateUnitTypeMapping()
+    public void UnitTypeOnlyMapping()
     {
-        CreateMap<CreateUnitTypeCommand, UnitType>();
+        CreateMap<UnitTypeNameOnlyCommand, UnitType>();
     }
 }
