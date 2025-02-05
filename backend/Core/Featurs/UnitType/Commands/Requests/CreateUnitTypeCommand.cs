@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Core.Featurs.UnitType.Commands.Requests;
 
-public class CreateUnitTypeCommand : IRequest<Response<string>>
+public class CreateUnitTypeCommand : UnitTypeNameOnlyCommand
 {
-    public required string Name { get; set; } 
+
 }
