@@ -13,7 +13,7 @@ namespace ServiceLayer.ServiceBase
         Task<T?> GetByIdAsync(long id);
         Task<IEnumerable<T>> GetListAsync();
         Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task<string> DeleteAsync(T entity);
     }
 
 }

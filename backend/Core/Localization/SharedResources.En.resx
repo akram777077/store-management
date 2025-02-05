@@ -129,8 +129,20 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted</value>
   </data>
+  <data name="IsAlreadyExits" xml:space="preserve">
+    <value>Already Exits</value>
+  </data>
+  <data name="NotEmpty" xml:space="preserve">
+    <value>Should not be empty</value>
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>Not Found</value>
+  </data>
+  <data name="NotNull" xml:space="preserve">
+    <value>Should not be null</value>
+  </data>
+  <data name="NotValid" xml:space="preserve">
+    <value>Not Valid</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
