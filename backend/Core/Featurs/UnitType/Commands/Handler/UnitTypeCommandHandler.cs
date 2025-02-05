@@ -16,18 +16,33 @@ public class UnitTypeCommandHandler(
     IUnitTypeService service,
     IMapper mapper)
     : ResponseHandler(localizer),
-        IRequestHandler<CreateUnitTypeCommand, Response<string>>,
-        IRequestHandler<DeleteUnitTypeByIdCommand, Response<string>>
+        IRequestHandler<UnitTypeNameOnlyCommand, Response<string>>,
+        IRequestHandler<DeleteUnitTypeByIdCommand, Response<string>>,
+        IRequestHandler<UpdateUnitTypeCommand,Response<string>>
 {
     private readonly IStringLocalizer<SharedResources> _localizer = localizer;
     private readonly IUnitTypeService _service = service;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<Response<string>> Handle(CreateUnitTypeCommand request, CancellationToken cancellationToken)
+    public async Task<Response<string>> Handle(UnitTypeNameOnlyCommand request, CancellationToken cancellationToken)
     {
+        if (await IsDuplicateName(request))
+            return Conflict("");
         var unitType = _mapper.Map<Data.Entities.UnitType>(request);
         await _service.AddAsync(unitType);
         return Created("");
+    }
+    private async Task<bool> IsDuplicateName(UnitTypeNameOnlyCommand request)
+    {
+        var entity = await _service.GetUnitTypesByNameAsync(request.Name);
+        if (entity is null)
+            return false;
+        else if (request is UpdateUnitTypeCommand updateCommand)
+        {
+            return updateCommand.Id != entity.Id;
+        }
+
+        return true;
     }
 
     public async Task<Response<string>> Handle(DeleteUnitTypeByIdCommand request, CancellationToken cancellationToken)
@@ -39,5 +54,17 @@ public class UnitTypeCommandHandler(
             return NotFound<string>();
         await _service.DeleteAsync(entity);
         return NoContent<string>("");
+    }
+
+    public async Task<Response<string>> Handle(UpdateUnitTypeCommand request, CancellationToken cancellationToken)
+    {
+        var entity = await _service.GetByIdAsync(request.Id);
+        if (entity is null)
+            return NotFound<string>();
+        if (await IsDuplicateName(request))
+            return Conflict("");
+        entity.Name = request.Name;
+        await _service.UpdateAsync(entity);
+        return NoContent<string>();
     }
 }
