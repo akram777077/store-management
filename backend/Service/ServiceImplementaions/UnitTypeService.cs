@@ -15,4 +15,8 @@ public class UnitTypeService : GenericService<UnitType>, IUnitTypeService
     }
 
     // Implement your functions here
+    public async Task<UnitType?> GetUnitTypesByNameAsync(string name)
+    {
+        return await _repository.GetUnitTypesByNameAsync(name);
+    }
 }

@@ -16,4 +16,11 @@ public class UnitTypeRepository : GenericRepository<UnitType>, IUnitTypeReposito
     }
 
     // Implement your functions here
+    public async Task<UnitType?> GetUnitTypesByNameAsync(string name)
+    {
+        return await _unitTypes
+            .AsNoTracking()
+            .Include(x => x.Products)
+            .FirstOrDefaultAsync(u => u.Name == name);
+    }
 }
