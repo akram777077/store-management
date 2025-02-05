@@ -47,6 +47,17 @@ namespace API.Controllers
             var response = await _mediator.Send(command);
             return NewResult(response);
         }
-        
+
+        [HttpPut]
+        [Route(Router.UnitTypesRoute.UpdateById)]
+        public async Task<ActionResult<UnitType>> UpdateUnitTest(
+            long id,
+            [FromBody] UnitTypeNameOnlyCommand command
+            )
+        {
+            var request = new UpdateUnitTypeCommand { Id = id, Name = command.Name };
+            var response = await _mediator.Send(request);
+            return NewResult(response);
+        }
     }
 }
