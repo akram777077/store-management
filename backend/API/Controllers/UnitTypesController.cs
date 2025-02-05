@@ -14,12 +14,16 @@ namespace API.Controllers
     public class UnitTypesController(IMediator mediator) : AppBaseController(mediator)
     {
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<UnitType>> GetUnitTypesList()
         {
             var response = await _mediator.Send(new GetUnitTypesListRequest());
             return NewResult(response);
         }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route(Router.UnitTypesRoute.GetUnitTypeByName)]
         public async Task<ActionResult<UnitType>> GetUnitTypeByName(string name)
         {
@@ -27,6 +31,9 @@ namespace API.Controllers
             return NewResult(response);
         }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route(Router.UnitTypesRoute.GetUnitTypeById)]
         public async Task<ActionResult<UnitType>> GetUnitTypeById(long id)
         {
@@ -34,12 +41,19 @@ namespace API.Controllers
             return NewResult(response);
         }
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<ActionResult<UnitType>> CreateUnitType([FromBody]UnitTypeNameOnlyCommand unitTypeNameOnlyCommand)
         {
             var response = await _mediator.Send(unitTypeNameOnlyCommand);
             return NewResult(response);
         }
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route(Router.UnitTypesRoute.DeleteById)]
         public async Task<ActionResult<UnitType>> DeleteUnitTypeByName(int id)
         {
@@ -49,6 +63,10 @@ namespace API.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [Route(Router.UnitTypesRoute.UpdateById)]
         public async Task<ActionResult<UnitType>> UpdateUnitTest(
             long id,
