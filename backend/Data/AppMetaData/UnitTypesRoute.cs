@@ -8,5 +8,6 @@ public static partial class Router
         public const string GetUnitTypeByName = Prefix + "nam/{name}";
         public const string GetUnitTypeById = Prefix + "id={id}";
         public const string DeleteById = Prefix + "delete/{id}";
+        public const string UpdateById = Prefix+ "update/{id}";
     }
 }
