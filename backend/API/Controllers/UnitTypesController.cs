@@ -34,9 +34,9 @@ namespace API.Controllers
             return NewResult(response);
         }
         [HttpPost]
-        public async Task<ActionResult<UnitType>> CreateUnitType([FromBody]CreateUnitTypeCommand unitTypeCommand)
+        public async Task<ActionResult<UnitType>> CreateUnitType([FromBody]UnitTypeNameOnlyCommand unitTypeNameOnlyCommand)
         {
-            var response = await _mediator.Send(unitTypeCommand);
+            var response = await _mediator.Send(unitTypeNameOnlyCommand);
             return NewResult(response);
         }
         [HttpDelete]
