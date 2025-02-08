@@ -8,8 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Featurs.UnitType.Commands.Requests;
-using Core.Featurs.UnitType.Commands.validator;
+using Core.Featurs.UnitTypes.Commands.Requests;
+using Core.Featurs.UnitTypes.Commands.validator;
 
 
 namespace Core
@@ -24,20 +24,8 @@ namespace Core
             //configuration of the automapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            var commandTypes = Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(t => 
-                    !t.IsAbstract && 
-                    typeof(UnitTypeNameOnlyCommand).IsAssignableFrom(t)
-                );
-
-            // Register NameOfUnitTypeValidator<T> for each concrete command
-            foreach (var commandType in commandTypes)
-            {
-                var validatorType = typeof(NameOfUnitTypeValidator<>).MakeGenericType(commandType);
-                var validatorInterface = typeof(IValidator<>).MakeGenericType(commandType);
-                services.AddTransient(validatorInterface, validatorType);
-            }
+            //configuration of the validator
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             return services;
 
