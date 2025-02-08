@@ -129,6 +129,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف</value>
   </data>
+  <data name="IdGreaterThanZero" xml:space="preserve">
+    <value>الرقم التعريفي يجب ان يكون اكبر من 0</value>
+  </data>
   <data name="IsAlreadyExits" xml:space="preserve">
     <value>موجود بالفعل</value>
   </data>

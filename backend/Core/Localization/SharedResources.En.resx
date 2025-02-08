@@ -129,6 +129,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted</value>
   </data>
+  <data name="IdGreaterThanZero" xml:space="preserve">
+    <value>Id vaule should be greater than 0</value>
+  </data>
   <data name="IsAlreadyExits" xml:space="preserve">
     <value>Already Exits</value>
   </data>
