@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Core.Featurs.Categories.Commands.Requests
 {
-    public class CreateCategoryCommand : CategoryBaseCommand
+    public class UpdateCategoryCommand : CategoryBaseCommand
     {
-
+        public long Id { get; set; }
     }
 }

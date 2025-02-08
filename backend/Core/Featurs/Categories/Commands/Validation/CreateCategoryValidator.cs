@@ -31,11 +31,7 @@ namespace Core.Featurs.Categories.Commands.Validation
         #region Actions
         public void ApplayValidationRules()
         {
-            RuleFor(s => s.Name).NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
-                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull])
-                .Length(2, 30);
-
-            RuleFor(s => s.Description).MaximumLength(500);
+            Include(new CategoryBaseValidator<CreateCategoryCommand>(_stringLocalizer));
 
         }
         public void ApplayCostumeValidationRules()

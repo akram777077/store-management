@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core.Featurs.Categories.Commands.Validation
 {
-    public class EditCategoryValidator : AbstractValidator<EditCategoryCommande>
+    public class UpdatetCategoryValidator : AbstractValidator<UpdateCategoryCommand>
     {
         #region Fields
         private readonly ICategoryService _categoryService;
@@ -19,7 +19,7 @@ namespace Core.Featurs.Categories.Commands.Validation
         #endregion
 
         #region Constructor
-        public EditCategoryValidator(ICategoryService categoryService, IStringLocalizer<SharedResources> stringLocalizer)
+        public UpdatetCategoryValidator(ICategoryService categoryService, IStringLocalizer<SharedResources> stringLocalizer)
         {
             _categoryService = categoryService;
             _stringLocalizer = stringLocalizer;
@@ -31,13 +31,10 @@ namespace Core.Featurs.Categories.Commands.Validation
         #region Actions
         public void ApplayValidationRules()
         {
-            RuleFor(s => s.Id).NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull])
-                .GreaterThan(0).WithMessage(_stringLocalizer[SharedResourcesKeys.NotValid]);
-            RuleFor(s => s.Name).NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
-                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull])
-                .Length(2, 30);
+            RuleFor(s => s.Id).NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .GreaterThan(0).WithMessage(_stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
 
-            RuleFor(s => s.Description).MaximumLength(500);
+            Include(new CategoryBaseValidator<UpdateCategoryCommand>(_stringLocalizer));
 
         }
         public void ApplayCostumeValidationRules()
