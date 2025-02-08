@@ -19,8 +19,6 @@ namespace API.Controllers
 
         [HttpGet(Router.CategoryRouteing.List)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Category>> GetCategoriesList()
         {
             var response = await _mediator.Send(new GetCategoriesListQuery());
@@ -61,8 +59,6 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<Category>> Create([FromBody] CreateCategoryCommand categoryCommand)
         {
             var response = await _mediator.Send(categoryCommand);
@@ -70,17 +66,17 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        [Route(Router.CategoryRouteing.Edit)]
+        [Route(Router.CategoryRouteing.Update)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<Category>> Edit([FromBody] EditCategoryCommande categoryCommande)
+        public async Task<ActionResult<Category>> UpdateCategory([FromRoute] long id,
+            [FromBody] CategoryBaseCommand baseCommande)
         {
+            var categoryCommande = new UpdateCategoryCommand { Id = id, Name = baseCommande.Name, Description = baseCommande.Description };
             var response = await _mediator.Send(categoryCommande);
             return NewResult(response);
         }
@@ -91,9 +87,8 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Category>> Delete([FromRoute] int Id)
+
+        public async Task<ActionResult<Category>> DeleteCategory([FromRoute] int Id)
         {
             var response = await _mediator.Send(new DeleteCategoryCommand { Id = Id });
             return NewResult(response);
