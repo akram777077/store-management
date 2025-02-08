@@ -60,7 +60,7 @@ namespace ServiceLayer.ServiceBase
 
         public async Task<IEnumerable<T>> GetListAsync()
         {
-            return await _repository.GetTableNoTracking().ToListAsync();
+            return await _repository.GetListAsync().ToListAsync();
         }
 
         #endregion

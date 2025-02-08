@@ -1,5 +1,7 @@
-﻿using FluentValidation;
+﻿using Core.Localization;
+using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,12 @@ namespace Core.Behavior
            where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
-        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+        private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+
+        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators, IStringLocalizer<SharedResources> stringLocalizer)
         {
             _validators = validators;
+            _stringLocalizer = stringLocalizer;
         }
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -30,9 +35,11 @@ namespace Core.Behavior
                 if (failures.Count != 0)
                 {
                     var message = failures.Select(x => x.PropertyName + ": " + x.ErrorMessage).FirstOrDefault();
-
-                    throw new ValidationException(message);
-
+                    
+                    if (message.Contains(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]))
+                        throw new DbUpdateException(message);
+                    else
+                        throw new ValidationException(message);
                 }
             }
             return await next();

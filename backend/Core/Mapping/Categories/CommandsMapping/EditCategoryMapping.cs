@@ -12,7 +12,7 @@ namespace Core.Mapping.Categories
     {
         private void EditCategoryMapping()
         {
-            CreateMap<EditCategoryCommande, Category>();
+            CreateMap<UpdateCategoryCommand, Category>();
         }
     }
 }

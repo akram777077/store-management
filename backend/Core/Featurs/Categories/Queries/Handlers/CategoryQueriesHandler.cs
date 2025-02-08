@@ -47,7 +47,7 @@ namespace Core.Featurs.Categories.Queries.Handlers
         public async Task<Response<GetCategoriesResponse>> Handle(GetCategoryByNameQuery request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.Name))
-                return BadRequest<GetCategoriesResponse>(); 
+                return BadRequest<GetCategoriesResponse>(nameof(request.Name) + ": " + _stringLocalizer[SharedResourcesKeys.NotEmpty]);
 
             var category = await _categoryService.GetCategoryByName(request.Name);
 
@@ -61,9 +61,9 @@ namespace Core.Featurs.Categories.Queries.Handlers
         public async Task<Response<GetCategoriesResponse>> Handle(GetCategoriesByIdQuery request, CancellationToken cancellationToken)
         {
             if(request.Id <= 0)
-                return BadRequest<GetCategoriesResponse>();
+                return BadRequest<GetCategoriesResponse>(_stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
 
-            var category = await _categoryService.GetCategoryById(request.Id);
+            var category = await _categoryService.GetByIdAsync(request.Id);
 
             if (category == null)
             {

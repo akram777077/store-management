@@ -17,4 +17,5 @@ public class SharedResourcesKeys
     public const string IsAlreadyExits = "IsAlreadyExits";
     public const string NotValid = "NotValid";
     public const string NoContent = "NoContent";
+    public const string IdGreaterThanZero = "IdGreaterThanZero";
 }

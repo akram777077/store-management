@@ -61,7 +61,7 @@ namespace Core.MiddleWare
                         if (e is DbUpdateException dbUpdateEx)
                         {
                             //context.Response.StatusCode = StatusCodes.Status409Conflict;
-                            responseModel.Message += e.Message;
+                            responseModel.Message = e.Message;
                             responseModel.Message += e.InnerException == null ? "" : "\n" + e.InnerException.Message;
                             responseModel.StatusCode = HttpStatusCode.Conflict;
                             response.StatusCode = (int)HttpStatusCode.Conflict;

@@ -1,6 +1,6 @@
 using Core.Bases;
 using MediatR;
-using Core.Featurs.UnitType.Query.Response;
+using Core.Featurs.UnitTypes.Query.Response;
 
 public class GetUnitTypeByNameRequest(string name) : IRequest<Response<GetUnitTypeResponse>>
 {

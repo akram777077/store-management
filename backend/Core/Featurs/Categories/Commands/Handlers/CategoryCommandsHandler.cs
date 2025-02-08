@@ -16,7 +16,7 @@ namespace Core.Featurs.Categories.Commands.Handlers
 {
     public class CategoryCommandsHandler : ResponseHandler,
         IRequestHandler<CreateCategoryCommand, Response<string>>,
-        IRequestHandler<EditCategoryCommande, Response<string>>,
+        IRequestHandler<UpdateCategoryCommand, Response<string>>,
         IRequestHandler<DeleteCategoryCommand, Response<string>>
     {
         #region Properties
@@ -43,7 +43,7 @@ namespace Core.Featurs.Categories.Commands.Handlers
             return Created("");
         }
 
-        public async Task<Response<string>> Handle(EditCategoryCommande request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = await _categoryService.GetByIdAsync(request.Id);
             if(category == null)
@@ -58,6 +58,10 @@ namespace Core.Featurs.Categories.Commands.Handlers
 
         public async Task<Response<string>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
+            // quick validation for the Id
+            if (request.Id < 1)
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
+
             //check if Id exists
             var category = await _categoryService.GetByIdAsync(request.Id);
 

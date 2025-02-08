@@ -15,8 +15,7 @@ namespace Infrastracture.Base
         IDbContextTransaction BeginTransaction();
         void Commit();
         void RollBack();
-        IQueryable<T> GetTableNoTracking();
-        IQueryable<T> GetTableAsTracking();
+        IQueryable<T> GetListAsync();
         Task<T> AddAsync(T entity);
         Task AddRangeAsync(ICollection<T> entities);
         Task UpdateAsync(T entity);

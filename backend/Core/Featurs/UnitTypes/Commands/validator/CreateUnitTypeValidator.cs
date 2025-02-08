@@ -1,4 +1,4 @@
-﻿using Core.Featurs.Categories.Commands.Requests;
+﻿using Core.Featurs.UnitTypes.Commands.Requests;
 using Core.Localization;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -9,20 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Featurs.Categories.Commands.Validation
+namespace Core.Featurs.UnitTypes.Commands.validator
 {
-    public class CreateCategoryValidator : AbstractValidator<CreateCategoryCommand>
+    public class CreateUnitTypeValidator : AbstractValidator<CreateUnitTypeCommand>
     {
         #region Fields
-        private readonly ICategoryService _categoryService;
+        private readonly IUnitTypeService _unitTypeService;
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         #endregion
 
         #region Constructor
-        public CreateCategoryValidator(ICategoryService categoryService, IStringLocalizer<SharedResources> stringLocalizer)
+        public CreateUnitTypeValidator(IStringLocalizer<SharedResources> stringLocalizer, IUnitTypeService unitTypeService)
         {
-            _categoryService = categoryService;
             _stringLocalizer = stringLocalizer;
+            _unitTypeService = unitTypeService;
             ApplayValidationRules();
             ApplayCostumeValidationRules();
         }
@@ -31,12 +31,12 @@ namespace Core.Featurs.Categories.Commands.Validation
         #region Actions
         public void ApplayValidationRules()
         {
-            Include(new CategoryBaseValidator<CreateCategoryCommand>(_stringLocalizer));
+            Include(new UnitTypeBaseValidator<CreateUnitTypeCommand>(_stringLocalizer));
 
         }
         public void ApplayCostumeValidationRules()
         {
-            RuleFor(s => s.Name).MustAsync(async (module, key, cancellationToken) => !await _categoryService.IsCategoryNameExists(module.Name))
+            RuleFor(s => s.Name).MustAsync(async (module, key, cancellationToken) => !await _unitTypeService.IsUnitTypeNameExists(module.Name))
                 .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
 
         }

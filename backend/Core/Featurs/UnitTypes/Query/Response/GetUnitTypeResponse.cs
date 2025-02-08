@@ -1,7 +1,7 @@
 using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Featurs.UnitType.Query.Response;
+namespace Core.Featurs.UnitTypes.Query.Response;
 
 public class GetUnitTypeResponse
 {
