@@ -21,26 +21,22 @@ public class CategoryService : GenericService<Category>, ICategoryService
 
     #region Functions Handling
     //implement your functions here
+    public async Task<Category?> GetCategoryByName(string name)
+    {
+        return await _repository.GetListAsync()
+        .Where(c => EF.Functions.ILike(c.Name, name))
+        .FirstOrDefaultAsync();
+    }
     public async Task<bool> IsCategoryNameExists(string name)
     {
-         return await _repository.GetTableNoTracking()
-                .AnyAsync(s => s.Name.Equals(name));
-    }
-    public async Task<Category> GetCategoryByName(string name)
-    {
-        return await _repository.GetTableNoTracking()
-                .FirstOrDefaultAsync(s => s.Name.Equals(name));
+         return await _repository.GetListAsync()
+                .AnyAsync(c => EF.Functions.ILike(c.Name, name));
     }
 
-    public async Task<Category> GetCategoryById(int id)
+    public async Task<bool> IsCategoryNameExists(string name, long id)
     {
-        return await _repository.GetByIdAsync(id);
-    }
-
-    public Task<bool> IsCategoryNameExists(string name, int id)
-    {
-        return _repository.GetTableNoTracking()
-                .AnyAsync(s => s.Name.Equals(name) && s.Id != id);
+        return await _repository.GetListAsync()
+                .AnyAsync(c => EF.Functions.ILike(c.Name, name) && c.Id != id);
     }
 
     #endregion
