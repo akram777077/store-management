@@ -1,4 +1,4 @@
-using Core.Featurs.UnitType.Query.Response;
+using Core.Featurs.UnitTypes.Query.Response;
 using Data.Entities;
 
 namespace Core.Mapping.UnitTypes;

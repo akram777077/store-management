@@ -1,4 +1,4 @@
-using Core.Featurs.UnitType.Commands.Requests;
+using Core.Featurs.UnitTypes.Commands.Requests;
 using Data.Entities;
 
 namespace Core.Mapping.UnitTypes;
@@ -8,6 +8,6 @@ public partial class UnitTypesProfile
 {
     public void UnitTypeOnlyMapping()
     {
-        CreateMap<UnitTypeNameOnlyCommand, UnitType>();
+        CreateMap<UnitTypeBaseCommand, UnitType>();
     }
 }
