@@ -38,7 +38,7 @@ namespace Infrastracture.Base
         }
 
 
-        public IQueryable<T> GetTableNoTracking()
+        public IQueryable<T> GetListAsync()
         {
             return _dbContext.Set<T>().AsNoTracking().AsQueryable();
         }
@@ -105,11 +105,6 @@ namespace Infrastracture.Base
 
         }
 
-        public IQueryable<T> GetTableAsTracking()
-        {
-            return _dbContext.Set<T>().AsQueryable();
-
-        }
 
         public virtual async Task UpdateRangeAsync(ICollection<T> entities)
         {
