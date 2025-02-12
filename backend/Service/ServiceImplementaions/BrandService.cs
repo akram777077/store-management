@@ -13,6 +13,11 @@ public class BrandService : GenericService<Brand>, IBrandService
     {
         _repository = repository;
     }
+    
+    public async Task<Brand?> GetBrandByNameAsync(string name)
+    {
+        return await _repository.GetBrandByNameAsync(name);
+    }
 
     // Implement your functions here
 }
