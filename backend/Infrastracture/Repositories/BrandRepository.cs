@@ -14,6 +14,11 @@ public class BrandRepository : GenericRepository<Brand>, IBrandRepository
     {
         _brands = context.Brands;
     }
+    
+    public async Task<Brand?> GetBrandByNameAsync(string name)
+    {
+        return await _brands.FirstOrDefaultAsync(x => x.Name == name);
+    }
 
     // Implement your functions here
 }

@@ -5,4 +5,5 @@ namespace Infrastracture.Interfaces;
 
 public interface IBrandRepository : IGenericRepository<Brand>
 {
+    public Task<Brand?> GetBrandByNameAsync(string name);
 }
