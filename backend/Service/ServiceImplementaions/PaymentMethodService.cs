@@ -14,5 +14,10 @@ public class PaymentMethodService : GenericService<PaymentMethod>, IPaymentMetho
         _repository = repository;
     }
 
+    public async Task<PaymentMethod?> GetPaymentMethodByNameAsync(string name)
+    {
+        return await _repository.GetPaymentMethodByNameAsync(name);
+    }
+
     // Implement your functions here
 }
