@@ -14,5 +14,10 @@ public class DealTypeService : GenericService<DealType>, IDealTypeService
         _repository = repository;
     }
 
+    public async Task<DealType?> GetDealTypeByNameAsync(string name)
+    {
+        return await _repository.GetDealTypeByNameAsync(name);
+    }
+
     // Implement your functions here
 }
