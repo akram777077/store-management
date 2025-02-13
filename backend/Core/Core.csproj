@@ -21,4 +21,9 @@
     <ProjectReference Include="../Service/Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Featurs\PaymentMethods\Commands\" />
+    <Folder Include="Mapping\PaymentMethods\CommandsMapping\" />
+  </ItemGroup>
+
 </Project>
