@@ -15,5 +15,10 @@ public class PaymentMethodRepository : GenericRepository<PaymentMethod>, IPaymen
         _paymentMethods = context.PaymentMethods;
     }
 
+    public async Task<PaymentMethod?> GetPaymentMethodByNameAsync(string name)
+    {
+        return await _paymentMethods.FirstOrDefaultAsync(x => x.MethodName == name);
+    }
+
     // Implement your functions here
 }
