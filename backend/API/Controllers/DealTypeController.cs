@@ -23,6 +23,16 @@ namespace API.Controllers
             return NewResult(response);
         }
         [HttpGet]
+        [Route(Router.DealTypeRouting.GetByName)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<DealType>> GetDealTypeByName(string name)
+        {
+            var response = await _mediator.Send(new GetDealTypeByNameRequest(name));
+            return NewResult(response);
+        }
+        [HttpGet]
         [Route(Router.DealTypeRouting.List)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<DealType>> GetDealTypeList()
