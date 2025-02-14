@@ -32,6 +32,16 @@ namespace API.Controllers
             var response = await _mediator.Send(new GetDealTypeByNameRequest(name));
             return NewResult(response);
         }
+        [HttpPost]
+        [Route(Router.DealTypeRouting.Create)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult<DealType>> CreateDealType([FromBody] CreateDealTypeCommand createDealTypeCommand)
+        {
+            var response = await _mediator.Send(createDealTypeCommand);
+            return NewResult(response);
+        }
         [HttpGet]
         [Route(Router.DealTypeRouting.List)]
         [ProducesResponseType(StatusCodes.Status200OK)]
