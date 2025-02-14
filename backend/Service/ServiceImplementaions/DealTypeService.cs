@@ -1,5 +1,6 @@
 using Data.Entities;
 using Infrastracture.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Interfaces;
 using ServiceLayer.ServiceBase;
 
@@ -23,6 +24,11 @@ public class DealTypeService : GenericService<DealType>, IDealTypeService
     {
         return await _repository.GetListAsync()
                .AnyAsync(c => EF.Functions.ILike(c.Name, name));
+    }
+    public async Task<bool> IsDealTypeNameExistsAsync(string name, int id)
+    {
+        return await _repository.GetListAsync()
+            .AnyAsync(c => EF.Functions.ILike(c.Name, name) && c.Id != id);
     }
 
 
