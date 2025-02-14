@@ -5,5 +5,7 @@ namespace ServiceLayer.Interfaces;
 
 public interface IBrandService : IGenericService<Brand>
 {
-    public Task<Brand?> GetBrandByNameAsync(string name);
+    Task<Brand?> GetBrandsByNameAsync(string name);
+    Task<bool> IsBrandNameExistsAsync(string name);
+    Task<bool> IsBrandNameExistsAsync(string name, long Id);
 }
