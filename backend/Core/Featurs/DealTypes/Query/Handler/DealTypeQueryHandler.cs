@@ -12,7 +12,7 @@ namespace Core.Featurs.DealTypes.Query.Handler
     public class DealTypeQueryHandler : ResponseHandler, 
         IRequestHandler<GetDealTypeByIdRequest, Response<GetDealTypeResponse>>,
         IRequestHandler<GetDealTypeByNameRequest, Response<GetDealTypeResponse>>,
-        IRequestHandler<GetDealTypesListRequest, Response<IEnumerable<GetDealTypeResponse>>>,
+        IRequestHandler<GetDealTypesListRequest, Response<IEnumerable<GetDealTypeResponse>>>
     {
         private readonly IDealTypeService _dealTypeService;
         private readonly IStringLocalizer<SharedResourcesKeys> _stringLocalizer;
