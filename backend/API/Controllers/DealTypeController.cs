@@ -13,6 +13,16 @@ namespace API.Controllers
     public class DealTypeController(IMediator mediator) : AppBaseController(mediator)
     {
         [HttpGet]
+        [Route(Router.DealTypeRouting.GetById)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<DealType>> GetDealTypeById(int id)
+        {
+            var response = await _mediator.Send(new GetDealTypeByIdRequest(id));
+            return NewResult(response);
+        }
+        [HttpGet]
         [Route(Router.DealTypeRouting.List)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<DealType>> GetDealTypeList()
