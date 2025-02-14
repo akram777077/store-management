@@ -17,7 +17,8 @@ public class DealTypeService : GenericService<DealType>, IDealTypeService
 
     public async Task<DealType?> GetDealTypeByNameAsync(string name)
     {
-        return await _repository.GetDealTypeByNameAsync(name);
+        return await _repository.GetListAsync()
+            .FirstOrDefaultAsync(c => EF.Functions.ILike(c.Name, name));
     }
 
     public async Task<bool> IsDealTypeExistsAsync(string name)
