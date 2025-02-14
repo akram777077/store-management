@@ -66,5 +66,16 @@ namespace API.Controllers
             var response = await _mediator.Send(new GetDealTypesListRequest());
             return NewResult(response);
         }
+        [HttpDelete]
+        [Route(Router.DealTypeRouting.Delete)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<DealType>> DeleteDealType(int id)
+        {
+            var command = new DeleteDealTypeByIdCommand { Id = id };
+            var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
     }
 }
