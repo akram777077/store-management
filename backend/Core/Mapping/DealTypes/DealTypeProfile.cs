@@ -12,6 +12,7 @@ namespace Core.Mapping.DealTypes
         public DealTypeProfile()
         {
             GetDealTypeMapping();
+            DealTypeCommandMapping();
         }
     }
 }
