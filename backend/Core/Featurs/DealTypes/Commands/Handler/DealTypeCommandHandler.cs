@@ -12,7 +12,8 @@ namespace Core.Featurs.DealTypes.Commands.Handler;
 
 public class DealTypeCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IDealTypeService dealTypeService, IMapper mapper) : ResponseHandler(stringLocalizer),
     IRequestHandler<CreateDealTypeCommand, Response<string>>,
-    IRequestHandler<UpdateDealTypeCommand, Response<string>>
+    IRequestHandler<UpdateDealTypeCommand, Response<string>>,
+    IRequestHandler<DeleteDealTypeByIdCommand, Response<string>>
 {
     private readonly IStringLocalizer<SharedResources> _stringLocalizer = stringLocalizer;
     private readonly IDealTypeService _dealTypeService = dealTypeService;
@@ -36,6 +37,18 @@ public class DealTypeCommandHandler(IStringLocalizer<SharedResources> stringLoca
 
         return Created("");
     }
-
+    public async Task<Response<string>> Handle(DeleteDealTypeByIdCommand request, CancellationToken cancellationToken)
+    {
+        if (request.Id < 1)
+            return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
+        var dealType = await _dealTypeService.GetByIdAsync(request.Id);
+        if (dealType == null)
+            return NotFound<string>();
+        var result = await _dealTypeService.DeleteAsync(dealType);
+        
+        if (result == "Deleted")
+            return Deleted<string>("");
+        return InternalServerError<string>();
+    }
     
 }
