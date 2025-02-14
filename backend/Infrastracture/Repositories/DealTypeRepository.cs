@@ -15,10 +15,5 @@ public class DealTypeRepository : GenericRepository<DealType>, IDealTypeReposito
         _dealTypes = context.DealTypes;
     }
 
-    public async Task<DealType?> GetDealTypeByNameAsync(string name)
-    {
-        return await _dealTypes.FirstOrDefaultAsync(x => x.Name == name);
-    }
-
     // Implement your functions here
 }
