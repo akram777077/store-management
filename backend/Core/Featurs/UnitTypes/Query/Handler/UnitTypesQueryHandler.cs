@@ -17,6 +17,7 @@ public class UnitTypesQueryHandler: ResponseHandler,
     IRequestHandler<GetUnitTypeByNameRequest, Response<GetUnitTypeResponse>>,
     IRequestHandler<GetUnitTypeByIdRequest, Response<GetUnitTypeResponse>>
 {
+
     private readonly IUnitTypeService _unitTypeService;
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
     private readonly IMapper _mapper;
@@ -51,7 +52,7 @@ public class UnitTypesQueryHandler: ResponseHandler,
     public async Task<Response<GetUnitTypeResponse>> Handle(GetUnitTypeByIdRequest request, CancellationToken cancellationToken)
     {
         if (request.Id <= 0)
-            return BadRequest<GetUnitTypeResponse>(_stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
+            return BadRequest<GetUnitTypeResponse>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
 
         var entity = await _unitTypeService.GetByIdAsync(request.Id);
         if (entity is null)

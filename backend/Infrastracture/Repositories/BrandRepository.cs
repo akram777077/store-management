@@ -14,6 +14,6 @@ public class BrandRepository : GenericRepository<Brand>, IBrandRepository
     {
         _brands = context.Brands;
     }
-
+   
     // Implement your functions here
 }
