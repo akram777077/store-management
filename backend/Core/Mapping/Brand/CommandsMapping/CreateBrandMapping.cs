@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Featurs.Brands.Query.Response;
+using Core.Featurs.Brands.Commands.Requests;
 using Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace Core.Mapping.Brands
 {
     public partial class BrandProfile
     {
-        public void GetBrandMapping()
+        private void CreateBrandMapping()
         {
-            CreateMap<Brand, GetBrandResponse>();
+            CreateMap<CreateBrandCommand, Brand>();
         }
     }
 }

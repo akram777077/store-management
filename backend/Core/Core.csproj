@@ -21,9 +21,4 @@
     <ProjectReference Include="../Service/Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapping\Brand\CommandsMapping\" />
-    <Folder Include="Mapping\Brand\CommandsMapping\" />
-  </ItemGroup>
-
 </Project>
