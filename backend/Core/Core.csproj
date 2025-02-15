@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Featurs\PaymentMethods\Commands\" />
     <Folder Include="Mapping\PaymentMethods\CommandsMapping\" />
   </ItemGroup>
 
