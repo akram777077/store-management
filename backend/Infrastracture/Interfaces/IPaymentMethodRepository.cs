@@ -5,5 +5,4 @@ namespace Infrastracture.Interfaces;
 
 public interface IPaymentMethodRepository : IGenericRepository<PaymentMethod>
 {
-    Task<PaymentMethod?> GetPaymentMethodByNameAsync(string name);
 }
