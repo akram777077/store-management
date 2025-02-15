@@ -6,5 +6,6 @@ public static partial class Router
     {
         public const string Prefix = "brands";
         public const string GetBrands = Prefix + "list";
+        public const string GetById = Prefix + "id={id:int}";
     }
 }
