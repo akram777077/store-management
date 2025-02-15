@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Core.Featurs.PaymentMethods.Query.Handler
 {
-    public class PaymentMethodsQueryHandler : ResponseHandler,
+    public class PaymentMethodQueryHandler : ResponseHandler,
      IRequestHandler<GetPaymentMethodsListRequest, Response<IEnumerable<GetPaymentMethodResponse>>>,
      IRequestHandler<GetPaymentMethodByNameRequest, Response<GetPaymentMethodResponse>>,
      IRequestHandler<GetPaymentMethodByIdRequest, Response<GetPaymentMethodResponse>>
@@ -25,7 +25,7 @@ namespace Core.Featurs.PaymentMethods.Query.Handler
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IMapper _mapper;
 
-        public PaymentMethodsQueryHandler(IPaymentMethodService paymentMethodService, IStringLocalizer<SharedResources> localizer, IMapper mapper)
+        public PaymentMethodQueryHandler(IPaymentMethodService paymentMethodService, IStringLocalizer<SharedResources> localizer, IMapper mapper)
         : base(localizer)
         {
             _paymentMethodService = paymentMethodService;

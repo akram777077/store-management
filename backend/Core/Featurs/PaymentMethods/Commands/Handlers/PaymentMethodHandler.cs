@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Core.Featurs.PaymentMethods.Commands.Handlers
 {
 
-    public class PaymentMethodHandlers(IStringLocalizer<SharedResources> stringLocalizer, IPaymentMethodService paymentMethodService, IMapper mapper) : ResponseHandler(stringLocalizer),
+    public class PaymentMethodHandler(IStringLocalizer<SharedResources> stringLocalizer, IPaymentMethodService paymentMethodService, IMapper mapper) : ResponseHandler(stringLocalizer),
     IRequestHandler<CreatePaymentMethodCommand, Response<string>>,
     IRequestHandler<UpdatePaymentMethodCommand, Response<string>>,
     IRequestHandler<DeletePaymentMethodByIdCommand, Response<string>>

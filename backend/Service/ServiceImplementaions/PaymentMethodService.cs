@@ -15,7 +15,7 @@ public class PaymentMethodService : GenericService<PaymentMethod>, IPaymentMetho
         _repository = repository;
     }
 
-    public async Task<PaymentMethod?> GetPaymentMethodsByNameAsync(string name)
+    public async Task<PaymentMethod?> GetPaymentMethodByNameAsync(string name)
     {
         return await _repository.GetListAsync()
             .FirstOrDefaultAsync(c => EF.Functions.ILike(c.MethodName, name));
