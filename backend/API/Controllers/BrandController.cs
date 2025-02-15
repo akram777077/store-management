@@ -43,4 +43,15 @@ public class BrandController(IMediator mediator) : AppBaseController(mediator)
         var response = await _mediator.Send(createBrandCommand);
         return NewResult(response);
     }
+    [HttpDelete]
+    [Route(Router.BrandRoute.Delete)]
+    public async Task<ActionResult<Brand>> DeleteBrand(int id)
+    {
+        var request = new DeleteBrandByIdCommand
+        {
+            Id = id
+        };
+        var response = await _mediator.Send(request);
+        return NewResult(response);
+    }
 }
