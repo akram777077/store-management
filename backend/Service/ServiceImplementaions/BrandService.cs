@@ -20,7 +20,7 @@ public class BrandService : GenericService<Brand>, IBrandService
     #endregion
 
     #region Functions Handling
-    public async Task<Brand?> GetBrandsByNameAsync(string name)
+    public async Task<Brand?> GetBrandByNameAsync(string name)
     {
         return await _repository.GetListAsync()
             .FirstOrDefaultAsync(c => EF.Functions.ILike(c.Name, name));
