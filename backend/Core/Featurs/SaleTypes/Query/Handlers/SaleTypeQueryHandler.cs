@@ -9,7 +9,7 @@ using ServiceLayer.Interfaces;
 
 namespace Core.Featurs.SaleTypes.Query.Handlers
 {
-    public class PaymentMethodQueriesHandler : ResponseHandler,
+    public class SaleTypeQueryHandler : ResponseHandler,
     IRequestHandler<GetSaleTypesListQuery, Response<IEnumerable<GetSaleTypesResponse>>>,
     IRequestHandler<GetSaleTypeByIdQuery, Response<GetSaleTypesResponse>>,
     IRequestHandler<GetSaleTypeByNameQuery, Response<GetSaleTypesResponse>>
@@ -18,7 +18,7 @@ namespace Core.Featurs.SaleTypes.Query.Handlers
         private readonly ISaleTypeService _saleTypeService;
         private readonly IMapper _mapper;
 
-        public PaymentMethodQueriesHandler(IStringLocalizer<SharedResources> stringLocalizer, ISaleTypeService saleTypeService, IMapper mapper)
+        public SaleTypeQueryHandler(IStringLocalizer<SharedResources> stringLocalizer, ISaleTypeService saleTypeService, IMapper mapper)
             : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
