@@ -14,6 +14,8 @@ namespace Core.Mapping.PaymentMethods
         public PaymentMethodProfile()
         {
             GetPaymentMethodMapping();
+            CreatePaymentMethodMapping();
+            EditPaymentMethodMapping();
         }
     }
 

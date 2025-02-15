@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Mapping.PaymentMethods
 {
-    public partial class PaymentMethodProfile : Profile
+    public partial class PaymentMethodProfile
     {
         public void GetPaymentMethodMapping()
         {
