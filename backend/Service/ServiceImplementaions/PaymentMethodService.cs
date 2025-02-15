@@ -1,5 +1,6 @@
 using Data.Entities;
 using Infrastracture.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Interfaces;
 using ServiceLayer.ServiceBase;
 
@@ -14,9 +15,22 @@ public class PaymentMethodService : GenericService<PaymentMethod>, IPaymentMetho
         _repository = repository;
     }
 
-    public async Task<PaymentMethod?> GetPaymentMethodByNameAsync(string name)
+    public async Task<PaymentMethod?> GetPaymentMethodsByNameAsync(string name)
     {
-        return await _repository.GetPaymentMethodByNameAsync(name);
+        return await _repository.GetListAsync()
+            .FirstOrDefaultAsync(c => EF.Functions.ILike(c.MethodName, name));
+    }
+
+    public async Task<bool> IsPaymentMethodNameExistsAsync(string name)
+    {
+        return await _repository.GetListAsync()
+               .AnyAsync(c => EF.Functions.ILike(c.MethodName, name));
+    }
+    
+    public async Task<bool> IsPaymentMethodNameExistsAsync(string name, int id)
+    {
+        return await _repository.GetListAsync()
+            .AnyAsync(c => EF.Functions.ILike(c.MethodName, name) && c.Id != id);
     }
 
     // Implement your functions here

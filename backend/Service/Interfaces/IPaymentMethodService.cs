@@ -5,6 +5,7 @@ namespace ServiceLayer.Interfaces;
 
 public interface IPaymentMethodService : IGenericService<PaymentMethod>
 {
-    Task<PaymentMethod?> GetPaymentMethodByNameAsync(string name);
-
+    public Task<PaymentMethod?> GetPaymentMethodsByNameAsync(string name);
+    public Task<bool> IsPaymentMethodNameExistsAsync(string name);
+    public Task<bool> IsPaymentMethodNameExistsAsync(string name, int id);
 }
