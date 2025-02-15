@@ -16,4 +16,11 @@ public class BrandController(IMediator mediator) : AppBaseController(mediator)
         var response = await _mediator.Send(new GetBrandListRequest());
         return NewResult(response);
     }
+    [HttpGet]
+    [Route(Router.BrandRoute.GetById)]
+    public async Task<ActionResult<Brand>> GetBrandById([FromRoute] int id)
+    {
+        var response = await _mediator.Send(new GetBrandByIdRequest(id));
+        return NewResult(response);
+    }
 }
