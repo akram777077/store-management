@@ -8,5 +8,6 @@ public partial class Router
         public const string List = Prefix + "/list";
         public const string GetById = Prefix + "/id={id:long}";
         public const string GetByName = Prefix + "/name/{name}";
+        public const string Create = Prefix + "/create";
     }
 }
