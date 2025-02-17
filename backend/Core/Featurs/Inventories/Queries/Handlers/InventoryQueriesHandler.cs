@@ -15,7 +15,8 @@ using System.Threading.Tasks;
 namespace Core.Featurs.Inventories.Queries.Handlers
 {
     public class InventoryQueriesHandler : ResponseHandler,
-        IRequestHandler<GetInventoriesById, Response<GetInventoriesResponse>>
+        IRequestHandler<GetInventoriesById, Response<GetInventoriesResponse>>,
+        IRequestHandler<GetInventoriesListQuery, Response<IEnumerable<GetInventoriesResponse>>>
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IInventoryService _inventoryService;
@@ -41,6 +42,15 @@ namespace Core.Featurs.Inventories.Queries.Handlers
             var inventoryMapper = _mapper.Map<GetInventoriesResponse>(inventory);
 
             return Success(inventoryMapper);
+        }
+
+        public async Task<Response<IEnumerable<GetInventoriesResponse>>> Handle(GetInventoriesListQuery request, CancellationToken cancellationToken)
+        {
+            var inventories = await _inventoryService.GetListAsync();
+
+            var inventoriesList = _mapper.Map<IEnumerable<GetInventoriesResponse>>(inventories);
+
+            return Success(inventoriesList);
         }
     }
 }

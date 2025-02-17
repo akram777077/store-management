@@ -12,6 +12,7 @@ namespace Data.AppMetaData
         {
             public const string Prefix = "Inventories/";
             public const string GetById = Prefix + "{id:int}";
+            public const string List = Prefix + "List";
         }
     }
 }

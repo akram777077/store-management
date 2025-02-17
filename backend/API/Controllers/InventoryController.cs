@@ -33,5 +33,16 @@ namespace API.Controllers
 
             return NewResult(response);
         }
+
+        [HttpGet]
+        [Route(Router.InventoryRoutes.List)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
+        public async Task<ActionResult<Inventory>> GetInventoriesList()
+        {
+            var response = await _mediator.Send(new GetInventoriesListQuery());
+
+            return NewResult(response);
+        }
     }
 }
