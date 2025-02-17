@@ -10,5 +10,6 @@ public partial class Router
         public const string GetByName = Prefix + "/name/{name}";
         public const string Create = Prefix + "/create";
         public const string Update = Prefix + "/update/{id:long}";
+        public const string Delete = Prefix + "/delete/{id:long}";
     }
 }
