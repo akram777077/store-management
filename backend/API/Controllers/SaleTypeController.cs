@@ -48,4 +48,21 @@ public class SaleTypeController(IMediator mediator) : AppBaseController(mediator
         var response = await _mediator.Send(command);
         return NewResult(response);
     }
+    [HttpPut]
+    [Route(Router.SaleTypeRouting.Update)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<SaleType>> UpdateSaleType(long id, [FromBody] SaleTypeBaseCommand command)
+    {
+        var commandUpdate = new UpdateSaleTypeCommand
+        {
+            Id = id,
+            Name = command.Name,
+            Description = command.Description
+        };
+        var response = await _mediator.Send(commandUpdate);
+        return NewResult(response);
+    }
 }
