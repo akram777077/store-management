@@ -17,4 +17,14 @@ public class SaleTypeController(IMediator mediator) : AppBaseController(mediator
         var response = await _mediator.Send(new GetSaleTypesListQuery());
         return Ok(response);
     }
+    [HttpGet]
+    [Route(Router.SaleTypeRouting.GetById)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<SaleType>> GetSaleTypeById(long id)
+    {
+        var response = await _mediator.Send(new GetSaleTypeByIdQuery(id));
+        return NewResult(response);
+    }
 }
