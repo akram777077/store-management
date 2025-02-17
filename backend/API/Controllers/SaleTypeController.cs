@@ -1,4 +1,5 @@
 using API.Base;
+using Core.Featurs.SaleTypes.Commands.Requests;
 using Core.Featurs.SaleTypes.Query.Requests;
 using Data.AppMetaData;
 using Data.Entities;
@@ -35,6 +36,16 @@ public class SaleTypeController(IMediator mediator) : AppBaseController(mediator
     public async Task<ActionResult<SaleType>> GetSaleTypeByName(string name)
     {
         var response = await _mediator.Send(new GetSaleTypeByNameQuery(name));
+        return NewResult(response);
+    }
+    [HttpPost]
+    [Route(Router.SaleTypeRouting.Create)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<SaleType>> CreateSaleType([FromBody] CreateSaleTypeCommand command)
+    {
+        var response = await _mediator.Send(command);
         return NewResult(response);
     }
 }
