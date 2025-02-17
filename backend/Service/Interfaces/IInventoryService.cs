@@ -5,4 +5,5 @@ namespace ServiceLayer.Interfaces;
 
 public interface IInventoryService : IGenericService<Inventory>
 {
+    Task<Inventory?> GetInventoryByLocationAsync(string location);
 }

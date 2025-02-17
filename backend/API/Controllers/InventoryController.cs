@@ -44,5 +44,19 @@ namespace API.Controllers
 
             return NewResult(response);
         }
+
+        [HttpGet]
+        [Route(Router.InventoryRoutes.GetByLocation)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async Task<ActionResult<Inventory>> GetInventoryByLocation(string location)
+        {
+            var response = await _mediator.Send(new GetInventoriesByLocationQuery(location));
+
+            return NewResult(response);
+        }
     }
 }

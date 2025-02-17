@@ -16,6 +16,7 @@ namespace Core.Featurs.Inventories.Queries.Handlers
 {
     public class InventoryQueriesHandler : ResponseHandler,
         IRequestHandler<GetInventoriesById, Response<GetInventoriesResponse>>,
+        IRequestHandler<GetInventoriesByLocationQuery, Response<GetInventoriesResponse>>, 
         IRequestHandler<GetInventoriesListQuery, Response<IEnumerable<GetInventoriesResponse>>>
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -52,5 +53,20 @@ namespace Core.Featurs.Inventories.Queries.Handlers
 
             return Success(inventoriesList);
         }
+
+        public async Task<Response<GetInventoriesResponse>> Handle(GetInventoriesByLocationQuery request, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(request.Location) && string.IsNullOrWhiteSpace(request.Location))
+                return BadRequest<GetInventoriesResponse>(nameof(request.Location) + ": " + _stringLocalizer[SharedResourcesKeys.NotEmpty]);
+
+            var inventory = await _inventoryService.GetInventoryByLocationAsync(request.Location);
+
+            if (inventory == null) return NotFound<GetInventoriesResponse>();
+
+            var inventoryMapper = _mapper.Map<GetInventoriesResponse>(inventory);
+
+            return Success(inventoryMapper);
+        }
     }
 }
+
