@@ -65,4 +65,18 @@ public class SaleTypeController(IMediator mediator) : AppBaseController(mediator
         var response = await _mediator.Send(commandUpdate);
         return NewResult(response);
     }
+    [HttpDelete]
+    [Route(Router.SaleTypeRouting.Delete)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<SaleType>> DeleteSaleType(long id)
+    {
+        var command = new DeleteSaleTypeCommand
+        {
+            Id = id
+        };
+        var response = await _mediator.Send(command);
+        return NewResult(response);
+    }
 }
