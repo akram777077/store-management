@@ -16,7 +16,8 @@ namespace Core.Featurs.Inventories.Commands.Handlers
 {
     public class InventoryCommandsHandler : ResponseHandler,
         IRequestHandler<UpdateInventoryCommand, Response<string>>,
-        IRequestHandler<DeleteInventoryCommand, Response<string>>
+        IRequestHandler<DeleteInventoryCommand, Response<string>>,
+        IRequestHandler<CreateInventoryCommand, Response<string>>
 
     {
         private readonly IStringLocalizer _stringLocalizer;
@@ -61,6 +62,15 @@ namespace Core.Featurs.Inventories.Commands.Handlers
             if (response == "Deleted") return Deleted<string>("");
 
             return InternalServerError<string>();
+        }
+
+        public async Task<Response<string>> Handle(CreateInventoryCommand request, CancellationToken cancellationToken)
+        {
+            var inventory = _mapper.Map<Inventory>(request);
+
+            var response = await _inventoryService.AddAsync(inventory);
+
+            return Created("");
         }
     }
 }

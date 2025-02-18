@@ -21,7 +21,8 @@ namespace Core.Featurs.Inventories.Commands.Validation
                 .Length(5, 30);
 
             RuleFor(i => i.Quantity)
-                .GreaterThan(0).WithMessage(stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
+                .GreaterThan(0).WithMessage(stringLocalizer[SharedResourcesKeys.IdGreaterThanZero])
+                .NotEmpty().WithMessage(stringLocalizer[SharedResourcesKeys.NotEmpty]);
 
             RuleFor(i => i.LastUpdate)
                 .NotNull().WithMessage(stringLocalizer[SharedResourcesKeys.NotNull]);

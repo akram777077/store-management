@@ -97,5 +97,21 @@ namespace API.Controllers
 
             return NewResult(response);
         }
+
+        [HttpPost]
+        [Route(Router.InventoryRoutes.Create)]
+
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+
+        public async Task<ActionResult<Inventory>> Create([FromBody] CreateInventoryCommand inventoryCommand)
+        {
+            var response = await _mediator.Send(inventoryCommand);
+
+            return NewResult(response);
+        }
     }
 }
