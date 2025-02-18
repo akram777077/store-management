@@ -1,5 +1,6 @@
 using Data.Entities;
 using Infrastracture.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Interfaces;
 using ServiceLayer.ServiceBase;
 
@@ -15,4 +16,21 @@ public class InventoryService : GenericService<Inventory>, IInventoryService
     }
 
     // Implement your functions here
+    public async Task<Inventory?> GetInventoryByLocationAsync(string location)
+    {
+        return await _repository.GetListAsync()
+            .Where(i => EF.Functions.ILike(i.Location, location))
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<bool> IsInventoryLocationIsExists(string location)
+    {
+        return await _repository.GetListAsync().AnyAsync(i => EF.Functions.ILike(i.Location, location));
+    }
+
+    public async Task<bool> IsInventoryLocationIsExists(string location, long id)
+    {
+        return await _repository.GetListAsync()
+            .AnyAsync(i => EF.Functions.ILike(i.Location, location) && i.Id != id);
+    }
 }
