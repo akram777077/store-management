@@ -1,4 +1,5 @@
 ﻿using API.Base;
+using Core.Featurs.Inventories.Commands.Requests;
 using Core.Featurs.Inventories.Queries.Requests;
 using Data.AppMetaData;
 using Data.Entities;
@@ -55,6 +56,30 @@ namespace API.Controllers
         public async Task<ActionResult<Inventory>> GetInventoryByLocation(string location)
         {
             var response = await _mediator.Send(new GetInventoriesByLocationQuery(location));
+
+            return NewResult(response);
+        }
+
+        [HttpPut]
+        [Route(Router.InventoryRoutes.Update)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+
+        public async Task<ActionResult<Inventory>> UpdateInventory([FromRoute] long id, 
+            [FromBody] InventoryBaseCommand inventoryCommand)
+        {
+            var updateCommand = new UpdateInventoryCommand 
+            {
+                Id = id,
+                Location = inventoryCommand.Location, 
+                Quantity = inventoryCommand.Quantity,
+            };
+
+            var response = await _mediator.Send(updateCommand);
 
             return NewResult(response);
         }

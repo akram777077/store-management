@@ -7,6 +7,8 @@ namespace Core.Mapping.Inventories
         public InventoryProfile() 
         {
             GetInventoriesMapping();
+            CreateInventoryMapping();
+            EditInventoryMapping();
         }
     }
 }

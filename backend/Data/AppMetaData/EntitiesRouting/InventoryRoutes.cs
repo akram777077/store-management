@@ -14,6 +14,8 @@ namespace Data.AppMetaData
             public const string GetById = Prefix + "{id:int}";
             public const string List = Prefix + "List";
             public const string GetByLocation = Prefix + "{location}";
+            public const string Create = Prefix + "Create";
+            public const string Update = Prefix + "Update/{id}";
         }
     }
 }
