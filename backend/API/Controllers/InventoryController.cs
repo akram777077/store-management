@@ -83,5 +83,19 @@ namespace API.Controllers
 
             return NewResult(response);
         }
+
+        [HttpDelete]
+        [Route(Router.InventoryRoutes.Delete)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<Inventory>> DeleteInventory([FromRoute] int id)
+        {
+            var response = await _mediator.Send(new DeleteInventoryCommand {Id = id });
+
+            return NewResult(response);
+        }
     }
 }

@@ -15,7 +15,9 @@ using System.Threading.Tasks;
 namespace Core.Featurs.Inventories.Commands.Handlers
 {
     public class InventoryCommandsHandler : ResponseHandler,
-        IRequestHandler<UpdateInventoryCommand, Response<string>>
+        IRequestHandler<UpdateInventoryCommand, Response<string>>,
+        IRequestHandler<DeleteInventoryCommand, Response<string>>
+
     {
         private readonly IStringLocalizer _stringLocalizer;
         private readonly IInventoryService _inventoryService;
@@ -40,6 +42,25 @@ namespace Core.Featurs.Inventories.Commands.Handlers
             await _inventoryService.UpdateAsync(inventory);
 
             return Success("");
+        }
+
+        public async Task<Response<string>> Handle(DeleteInventoryCommand request, CancellationToken cancellationToken)
+        {
+            // validate the id
+            if (request.Id <= 0)
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.IdGreaterThanZero]);
+
+            var inventory = await _inventoryService.GetByIdAsync(request.Id);
+
+            // validate if the inventory is exists or not
+            if (inventory == null) return NotFound<string>();
+
+            // delete the inventory
+            var response = await _inventoryService.DeleteAsync(inventory);
+
+            if (response == "Deleted") return Deleted<string>("");
+
+            return InternalServerError<string>();
         }
     }
 }
