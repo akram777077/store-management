@@ -27,4 +27,14 @@ public class PaymentMethodsController(IMediator mediator) : AppBaseController(me
         var response = await _mediator.Send(new GetPaymentMethodByNameRequest(name));
         return NewResult(response);
     }
+    [HttpGet]
+    [Route(Router.PaymentMethodRouting.GetById)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<PaymentMethod>> GetPaymentMethodById([FromRoute] int id)
+    {
+        var response = await _mediator.Send(new GetPaymentMethodByIdRequest(id));
+        return NewResult(response);
+    }
 }
