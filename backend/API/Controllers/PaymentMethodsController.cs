@@ -50,4 +50,21 @@ public class PaymentMethodsController(IMediator mediator) : AppBaseController(me
         var response = await _mediator.Send(createPaymentMethodCommand);
         return NewResult(response);
     }
+    [HttpPut]
+    [Route(Router.PaymentMethodRouting.Update)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<PaymentMethod>> UpdatePaymentMethod([FromRoute] long id,
+        [FromBody] PaymentMethodBaseCommand baseCommand)
+    {
+        var command = new UpdatePaymentMethodCommand
+        {
+            Id = id,
+            Name = baseCommand.Name
+        };
+        var response = await _mediator.Send(command);
+        return NewResult(response);
+    }
 }
