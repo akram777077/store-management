@@ -9,7 +9,8 @@ namespace Core.Mapping.PaymentMethods
     {
         public void CreatePaymentMethodMapping()
         {
-            CreateMap<CreatePaymentMethodCommand, PaymentMethod>();
+            CreateMap<CreatePaymentMethodCommand, PaymentMethod>()
+                .ForMember(dest => dest.MethodName, opt => opt.MapFrom(src => src.Name));
         }
     }
 
