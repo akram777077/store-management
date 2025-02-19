@@ -1,4 +1,5 @@
 using API.Base;
+using Core.Featurs.PaymentMethods.Commands.Requests;
 using Core.Featurs.PaymentMethods.Query.Request;
 using Data.AppMetaData;
 using Data.Entities;
@@ -35,6 +36,18 @@ public class PaymentMethodsController(IMediator mediator) : AppBaseController(me
     public async Task<ActionResult<PaymentMethod>> GetPaymentMethodById([FromRoute] int id)
     {
         var response = await _mediator.Send(new GetPaymentMethodByIdRequest(id));
+        return NewResult(response);
+    }
+
+    [HttpPost]
+    [Route(Router.PaymentMethodRouting.Add)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<PaymentMethod>> AddPaymentMethod(
+        [FromBody] CreatePaymentMethodCommand createPaymentMethodCommand)
+    {
+        var response = await _mediator.Send(createPaymentMethodCommand);
         return NewResult(response);
     }
 }
