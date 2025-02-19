@@ -27,7 +27,7 @@ public class PaymentMethodService : GenericService<PaymentMethod>, IPaymentMetho
                .AnyAsync(c => EF.Functions.ILike(c.MethodName, name));
     }
     
-    public async Task<bool> IsPaymentMethodNameExistsAsync(string name, int id)
+    public async Task<bool> IsPaymentMethodNameExistsAsync(string name, long id)
     {
         return await _repository.GetListAsync()
             .AnyAsync(c => EF.Functions.ILike(c.MethodName, name) && c.Id != id);
