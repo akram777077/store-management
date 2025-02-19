@@ -67,4 +67,18 @@ public class PaymentMethodsController(IMediator mediator) : AppBaseController(me
         var response = await _mediator.Send(command);
         return NewResult(response);
     }
+    [HttpDelete]
+    [Route(Router.PaymentMethodRouting.Delete)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<PaymentMethod>> DeletePaymentMethod([FromRoute] long id)
+    {
+        var command = new DeletePaymentMethodByIdCommand
+        {
+            Id = id
+        };
+        var response = await _mediator.Send(command);
+        return NewResult(response);
+    }
 }
