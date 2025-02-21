@@ -3,6 +3,7 @@ using ServiceLayer.ServiceBase;
 
 namespace ServiceLayer.Interfaces;
 
-public interface IUserService : IGenericService<User>
+public interface IUserService 
 {
+    public Task<string> AddUserAsync(User user, string password);
 }

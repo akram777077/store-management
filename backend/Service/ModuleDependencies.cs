@@ -26,6 +26,7 @@ public static class ModuleDependencies
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IBrandService, BrandService>();
         services.AddScoped<IInventoryDetailService, InventoryDetailService>();
+        services.AddScoped<IUserService, UserService>();
 
         // Register generic service
         services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
