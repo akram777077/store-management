@@ -3,11 +3,10 @@ using AutoMapper;
 
 namespace Core.Mapping.UnitTypes;
 
-public partial class UnitTypesProfile : Profile
+public partial class UnitTypeProfile : Profile
 {
-    public UnitTypesProfile()
+    public UnitTypeProfile()
     {
-        GetUnitTypesMapping();
         GetUnitTypeMapping();
         UnitTypeOnlyMapping();
     }
