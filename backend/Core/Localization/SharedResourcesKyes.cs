@@ -18,4 +18,14 @@ public class SharedResourcesKeys
     public const string NotValid = "NotValid";
     public const string NoContent = "NoContent";
     public const string IdGreaterThanZero = "IdGreaterThanZero";
+    public const string MaxLengthis100 = "MaxLengthis100";
+    public const string Required = "Required";
+    public const string PasswordNotEqualConfirmPass = "PasswordNotEqualConfirmPass";
+
+    public const string FaildToAdd = "FaildToAdd";
+    public const string TryAgain = "TryAgain";
+    public const string UpdateFailed = "UpdateFailed";
+    public const string Updated = "Updated";
+    public const string InternalServerError = "InternalServerError";
+
 }
