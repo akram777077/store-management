@@ -129,11 +129,20 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف</value>
   </data>
+  <data name="FaildToAdd" xml:space="preserve">
+    <value>فشل عملية الاظافة</value>
+  </data>
   <data name="IdGreaterThanZero" xml:space="preserve">
     <value>الرقم التعريفي يجب ان يكون اكبر من 0</value>
   </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>مشكل سيرفر داخلي</value>
+  </data>
   <data name="IsAlreadyExits" xml:space="preserve">
     <value>موجود بالفعل</value>
+  </data>
+  <data name="MaxLengthis100" xml:space="preserve">
+    <value>لا يمكن الزيادة عن 100 رمز</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>هاذا الحقل لايجب ان يكون فارغا</value>
@@ -147,13 +156,28 @@
   <data name="NotValid" xml:space="preserve">
     <value>غير صالح</value>
   </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>تاكيد كلمة السر لا يتطابق مع كلمة السر</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>لايمكن ترك هاذا الحقل دون قيمة</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>نجاح</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>اعد المحاولة</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>غير مصرح</value>
   </data>
   <data name="UnprocessableEntity" xml:space="preserve">
     <value>كيان غير قابل للمعالجة</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>تم التحديث</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>فشل عملية التحديث</value>
   </data>
 </root>

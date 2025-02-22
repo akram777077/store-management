@@ -4,7 +4,7 @@ using Data.Entities;
 namespace Core.Mapping.UnitTypes;
 
 
-public partial class UnitTypesProfile 
+public partial class UnitTypeProfile 
 {
     public void UnitTypeOnlyMapping()
     {

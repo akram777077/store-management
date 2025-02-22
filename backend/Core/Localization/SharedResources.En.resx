@@ -129,11 +129,20 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted</value>
   </data>
+  <data name="FaildToAdd" xml:space="preserve">
+    <value>Creation faild</value>
+  </data>
   <data name="IdGreaterThanZero" xml:space="preserve">
     <value>Id vaule should be greater than 0</value>
   </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>Internal server error</value>
+  </data>
   <data name="IsAlreadyExits" xml:space="preserve">
     <value>Already Exits</value>
+  </data>
+  <data name="MaxLengthis100" xml:space="preserve">
+    <value>Max Length is 100 chars</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Should not be empty</value>
@@ -147,13 +156,28 @@
   <data name="NotValid" xml:space="preserve">
     <value>Not Valid</value>
   </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>Missmatch between password and confirmPassword</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>TryAgain</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>UnAuthorized</value>
   </data>
   <data name="UnprocessableEntity" xml:space="preserve">
     <value>Unprocessable Entity</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update Failed</value>
   </data>
 </root>

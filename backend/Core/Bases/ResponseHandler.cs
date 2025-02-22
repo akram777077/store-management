@@ -23,13 +23,13 @@ public class ResponseHandler
                 Message = string.IsNullOrEmpty(message)? _stringLocalizer[SharedResourcesKeys.Deleted] : message
             };
         }
-        public Response<T> InternalServerError<T>()
+        public Response<T> InternalServerError<T>(string? message = null)
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.InternalServerError,
                 Succeeded = true,
-                Message = "InternalServerError"
+                Message = string.IsNullOrEmpty(message) ? _stringLocalizer[SharedResourcesKeys.InternalServerError] : message
             };
         }
         public Response<T> Success<T>(T entity, object? Meta = null)

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Infrastracture.Data;
 using dotenv.net;
 using Microsoft.AspNetCore.Identity;
+using Infrastracture.Interseptors;
 
 namespace Infrastracture
 {
@@ -27,9 +28,10 @@ namespace Infrastracture
                 throw new InvalidOperationException("Database connection string is not configured.");
             }
 
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<AppDbContext>((sp, options) =>
             {
-                options.UseNpgsql(connectionStr);
+                options.UseNpgsql(connectionStr).AddInterceptors(
+                new SoftDeleteInterceptor());
             });
 
             services.AddIdentity<User, IdentityRole>(options =>

@@ -18,6 +18,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         entity.Property(e => e.CreatedAt)
             .HasColumnType("timestamp without time zone")
             .HasColumnName("created_at");
-        entity.Property(e => e.Email).HasColumnName("email");
+        entity.HasQueryFilter(e => !e.IsDeleted);
     }
 }
