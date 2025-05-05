@@ -27,5 +27,27 @@ public class SharedResourcesKeys
     public const string UpdateFailed = "UpdateFailed";
     public const string Updated = "Updated";
     public const string InternalServerError = "InternalServerError";
+    public const string EmailDoseNotExist = "EmailDoseNotExist";
+    public const string WrongPassword = "WrongPassword";
+    public const string InvalidEmail = "InvalidEmail";
+    public const string SignInLocked = "SignInLocked";
+    public const string min = "min";
+    public const string After = "After";
+    public const string Later = "Later";
+    public const string TokenIsExpired = "TokenIsExpired";
+
+    public const string UserNotFound = "UserNotFound";
+
+    //Not translated yet
+    public const string FailedToRemoveOldClaims = "FailedToRemoveOldClaims";
+    public const string FailedToAddNewClaims = "FailedToAddNewClaims";
+    public const string RoleAlreadyExists = "RoleAlreadyExists";
+    public const string RoleIsInUse = "RoleIsInUse";
+    public const string FailedToRemoveOldRoles = "FailedToRemoveOldRoles";
+    public const string FailedToAddNewRoles = "FailedToAddNewRoles";
+    public const string RoleDoseNotExist = "RoleDoseNotExist";
+
+
+
 
 }

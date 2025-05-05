@@ -209,6 +209,41 @@ namespace Infrastracture.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("Data.Entities.Identity.UserRefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("AddedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("JwtId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RefreshTokenHashed")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRefreshTokens");
+                });
+
             modelBuilder.Entity("Data.Entities.Inventory", b =>
                 {
                     b.Property<long>("Id")
@@ -710,6 +745,17 @@ namespace Infrastracture.Migrations
                     b.Navigation("ProductDetail");
                 });
 
+            modelBuilder.Entity("Data.Entities.Identity.UserRefreshToken", b =>
+                {
+                    b.HasOne("Data.Entities.Identity.User", "user")
+                        .WithMany("UserRefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("Data.Entities.InventoryDetail", b =>
                 {
                     b.HasOne("Data.Entities.Inventory", "Inventory")
@@ -894,6 +940,8 @@ namespace Infrastracture.Migrations
             modelBuilder.Entity("Data.Entities.Identity.User", b =>
                 {
                     b.Navigation("Sales");
+
+                    b.Navigation("UserRefreshTokens");
                 });
 
             modelBuilder.Entity("Data.Entities.Inventory", b =>

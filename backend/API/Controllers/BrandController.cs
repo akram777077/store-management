@@ -4,12 +4,15 @@ using Core.Featurs.Brands.Query.Request;
 using Data.AppMetaData;
 using Data.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 [ApiController]
+[Authorize]
 public class BrandController(IMediator mediator) : AppBaseController(mediator)
 {
+    [AllowAnonymous]
     [HttpGet]
     [Route(Router.BrandRoute.GetBrands)]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -58,6 +61,8 @@ public class BrandController(IMediator mediator) : AppBaseController(mediator)
         var response = await _mediator.Send(createBrandCommand);
         return NewResult(response);
     }
+
+    [Authorize(Policy = "DeleteBrand")]
     [HttpDelete]
     [Route(Router.BrandRoute.Delete)]
     [ProducesResponseType(StatusCodes.Status200OK)]

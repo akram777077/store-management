@@ -40,12 +40,12 @@ public class UserService : IUserService
                 await transact.RollbackAsync();
                 return string.Join(",", createResult.Errors.Select(x => x.Description).ToList());
             }
-            //var AddToRoleResult = await _userManager.AddToRoleAsync(user, "User");
-            //if (!AddToRoleResult.Succeeded)
-            //{
-            //    await transact.RollbackAsync();
-            //    return "Failed";
-            //}
+            var AddToRoleResult = await _userManager.AddToRoleAsync(user, "User");
+            if (!AddToRoleResult.Succeeded)
+            {
+                await transact.RollbackAsync();
+                return "Failed";
+            }
             await transact.CommitAsync();
             return "Success";
         }
