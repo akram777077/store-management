@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Infrastracture.Data
 {
-    public class AppDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<User, Role, string>
     {
         public AppDbContext()
         {
@@ -35,6 +35,7 @@ namespace Infrastracture.Data
         public virtual DbSet<SaleType> SaleTypes { get; set; }
         public virtual DbSet<UnitType> UnitTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

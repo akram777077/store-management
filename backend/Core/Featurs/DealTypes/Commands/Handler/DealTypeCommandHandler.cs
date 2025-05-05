@@ -50,5 +50,5 @@ public class DealTypeCommandHandler(IStringLocalizer<SharedResources> stringLoca
             return Deleted<string>("");
         return InternalServerError<string>();
     }
-    
+
 }

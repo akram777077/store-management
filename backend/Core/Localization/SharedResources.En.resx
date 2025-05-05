@@ -129,6 +129,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted</value>
   </data>
+  <data name="EmailDoseNotExist" xml:space="preserve">
+    <value>Email dose not exist</value>
+  </data>
   <data name="FaildToAdd" xml:space="preserve">
     <value>Creation faild</value>
   </data>
@@ -138,11 +141,17 @@
   <data name="InternalServerError" xml:space="preserve">
     <value>Internal server error</value>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid Email</value>
+  </data>
   <data name="IsAlreadyExits" xml:space="preserve">
     <value>Already Exits</value>
   </data>
   <data name="MaxLengthis100" xml:space="preserve">
     <value>Max Length is 100 chars</value>
+  </data>
+  <data name="min" xml:space="preserve">
+    <value>min</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Should not be empty</value>
@@ -162,8 +171,14 @@
   <data name="Required" xml:space="preserve">
     <value>This field is required</value>
   </data>
+  <data name="SignInLocked" xml:space="preserve">
+    <value>SignIn is Locked</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>Token Is Expired</value>
   </data>
   <data name="TryAgain" xml:space="preserve">
     <value>TryAgain</value>
@@ -179,5 +194,14 @@
   </data>
   <data name="UpdateFailed" xml:space="preserve">
     <value>Update Failed</value>
+  </data>
+  <data name="UserNameDoseNotExist" xml:space="preserve">
+    <value>Username dosen't exist</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User Not Found</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Wrong Password</value>
   </data>
 </root>
